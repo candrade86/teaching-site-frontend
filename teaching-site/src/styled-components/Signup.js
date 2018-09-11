@@ -9,6 +9,23 @@ export const Container = styled.div`
     min-height: 100vh;
 `
 
+export const TitleWrap = styled.div`
+    text-align: center;
+    margin-bottom: 7%;
+`
+
+export const Title = styled.h1`
+    font-size: 4rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 5%;
+`
+
+export const Slogan = styled.h1`
+    font-size: 4rem;
+    color: white;
+`
+
 export const SignupWrap = styled.div`
     max-width: 500px;
     width: 90%;
@@ -54,8 +71,6 @@ export const Input = styled.input`
     width: 70%;
     height: 10%;
     margin: 5% 0;
-
-    border: solid purple;
 `
 
 export const Button = styled.button`
@@ -70,19 +85,56 @@ export const OrWrap = styled.div`
     width: 70%;
     font-size: 1.6rem;
     color: white;
+    padding: 4% 0;
 `
 
 export const HRWrap = styled.div`
     display: flex;
     justify-content: flex-start;
-    width: 45%;
+    width: 40%;
 `
 
 export const HR = styled.hr`
     align-self: flex-start;
     color: white;
     width: 100%;
+`
 
-    /* border: solid yellow; */
+export const Policy = styled.div`
+    width: 70%;
+    padding-bottom: 2%;
+`
+export const PolicyText = styled.p`
+    font-size: 1.4rem;
+    color: white;
+    text-align: center;
+`
 
+export const SigninWrap = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    padding: 3% 0;
+`
+
+export const SigninText = styled.p`
+    font-size: 1.7rem;
+    color: white;
+`
+
+export const SigninLink = styled.a`
+    font-size: 1.7rem;
+    color: white;
+`
+
+export const CopyrightWrap = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 1%;
+`
+
+export const Copyright = styled.div`
+    font-size: 1.5rem;
+    color: white;
 `
