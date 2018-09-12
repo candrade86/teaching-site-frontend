@@ -29,7 +29,8 @@ export const Slogan = styled.h1`
 export const SignupWrap = styled.div`
     max-width: 400px;
     width: 100%;
-    height: 65vh;
+    height: auto;
+    padding-bottom: 2.7%;
     background: whitesmoke;
 
     /* border: solid white; */
@@ -57,7 +58,7 @@ export const Form = styled.form`
 export const LabelWrap = styled.div`
     position: relative;
     bottom: -17px;
-    width: 70%;
+    width: 85%;
 
 `
 
@@ -68,7 +69,7 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-    width: 70%;
+    width: 85%;
     padding: 8px 20px;
     margin: 5% 0;
     border: 3px solid #ccc;
@@ -83,7 +84,7 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-    width: 70%;
+    width: 85%;
     padding: 8px 20px;
 `
 
@@ -91,7 +92,7 @@ export const OrWrap = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 70%;
+    width: 85%;
     font-size: 1.6rem;
     padding: 4% 0;
 `
@@ -109,7 +110,7 @@ export const HR = styled.hr`
 `
 
 export const Policy = styled.div`
-    width: 70%;
+    width: 85%;
     padding-bottom: 2%;
 `
 export const PolicyText = styled.p`
