@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import fb from '../assets/fb.png';
 
 export const Container = styled.div`
     display: flex;
@@ -86,6 +87,19 @@ export const Input = styled.input`
 export const Button = styled.button`
     width: 85%;
     padding: 8px 20px;
+    font-size: 1.7rem;
+    font-weight: 900;
+`
+
+export const FacebookButton = styled.button`
+    width: 85%;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 1.7rem;
+    color: white;
+    background: #3b5998 url(${fb});
+    background-size: auto 30px;
+    background-repeat: no-repeat;
 `
 
 export const OrWrap = styled.div`

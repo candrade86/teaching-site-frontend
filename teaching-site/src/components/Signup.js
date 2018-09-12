@@ -8,6 +8,7 @@ import {
     LabelWrap,
     Label,
     Input,
+    FacebookButton,
     Button,
     OrWrap,
     HRWrap,
@@ -23,6 +24,8 @@ import {
     Title,
     Slogan    
 } from '../styled-components/Signup';
+
+import fb from '../assets/fb.png';
 
 class SignUp extends Component {
     render(){
@@ -49,7 +52,7 @@ class SignUp extends Component {
 
                             <Button>Join now</Button>
                             <OrWrap><HRWrap><HR /></HRWrap>or<HRWrap><HR /></HRWrap></OrWrap>
-                            <Button>Continue with Facebook</Button>
+                            <FacebookButton>Continue with Facebook</FacebookButton>
 
                             <SigninWrap>
                                 <SigninText>Already a student? &nbsp;</SigninText><SigninLink>Sign in</SigninLink>
