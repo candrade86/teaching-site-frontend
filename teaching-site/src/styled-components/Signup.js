@@ -98,6 +98,10 @@ export const Button = styled.button`
     font-weight: 900;
     border-radius: 3px;
     border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 export const FacebookButton = styled.button`
@@ -111,6 +115,10 @@ export const FacebookButton = styled.button`
     background-repeat: no-repeat;
     border: none;
     border-radius: 3px;
+
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 export const OrWrap = styled.div`
@@ -160,6 +168,10 @@ export const SigninText = styled.p`
 export const SigninLink = styled.a`
     font-size: 1.7rem;
     color: dodgerblue;
+
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 export const CopyrightWrap = styled.div`
