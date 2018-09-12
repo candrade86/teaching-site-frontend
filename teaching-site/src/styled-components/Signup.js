@@ -104,7 +104,7 @@ export const Button = styled.button`
     }
 `
 
-export const FacebookButton = styled.button`
+export const FacebookButton = styled.div`
     width: 85%;
     padding: 8px 20px;
     text-align: center;

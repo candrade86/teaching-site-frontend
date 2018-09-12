@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Facebook from './Facebook';
+
 import { 
     Container,
     SignupWrap,
@@ -53,7 +55,9 @@ class SignUp extends Component {
 
                             <Button>Join now</Button>
                             <OrWrap><HRWrap><HR /></HRWrap>or<HRWrap><HR /></HRWrap></OrWrap>
-                            <FacebookButton>Continue with Facebook</FacebookButton>
+
+                            {/* <FacebookButton >Continue with Facebook</FacebookButton> */}
+                            <Facebook  />
 
                             <SigninWrap>
                                 <SigninText>Already a student? &nbsp;</SigninText><SigninLink>Sign in</SigninLink>
