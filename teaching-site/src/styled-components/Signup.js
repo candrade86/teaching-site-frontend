@@ -62,7 +62,7 @@ export const LabelWrap = styled.div`
 `
 
 export const Label = styled.label`
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: darkgray;
     font-weight: 900;
 `
