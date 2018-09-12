@@ -1,5 +1,9 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import fb from '../assets/fb.png';
+
+import { fadeIn } from 'react-animations';
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 
 export const Container = styled.div`
     display: flex;
@@ -20,11 +24,13 @@ export const Title = styled.h1`
     font-weight: 900;
     color: white;
     margin-bottom: 5%;
+    animation: 1.5s ${fadeInAnimation};
 `
 
 export const Slogan = styled.h1`
     font-size: 4rem;
     color: white;
+    animation: 2s ${fadeInAnimation};
 `
 
 export const SignupWrap = styled.div`
@@ -33,6 +39,7 @@ export const SignupWrap = styled.div`
     height: auto;
     padding-bottom: 2.7%;
     background: whitesmoke;
+    animation: 2.2s ${fadeInAnimation};
 
     /* border: solid white; */
 `
@@ -160,6 +167,7 @@ export const CopyrightWrap = styled.div`
     justify-content: center;
     width: 100%;
     padding-top: 1%;
+    animation: 2.2s ${fadeInAnimation};
 `
 
 export const Copyright = styled.div`
