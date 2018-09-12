@@ -89,6 +89,8 @@ export const Button = styled.button`
     padding: 8px 20px;
     font-size: 1.7rem;
     font-weight: 900;
+    border-radius: 3px;
+    border: none;
 `
 
 export const FacebookButton = styled.button`
@@ -101,6 +103,7 @@ export const FacebookButton = styled.button`
     background-size: auto 30px;
     background-repeat: no-repeat;
     border: none;
+    border-radius: 3px;
 `
 
 export const OrWrap = styled.div`
