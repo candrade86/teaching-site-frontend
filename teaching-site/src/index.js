@@ -12,7 +12,7 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(
     <BrowserRouter>
         <App>
-            <Route path='/signup' component={Signup} />    
+            <Route path='/' exact component={Signup} />    
         </App>
     </BrowserRouter>
 , document.getElementById('root'));
