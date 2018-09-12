@@ -100,6 +100,7 @@ export const FacebookButton = styled.button`
     background: #3b5998 url(${fb});
     background-size: auto 30px;
     background-repeat: no-repeat;
+    border: none;
 `
 
 export const OrWrap = styled.div`
