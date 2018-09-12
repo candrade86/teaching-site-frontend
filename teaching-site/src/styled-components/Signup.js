@@ -69,7 +69,7 @@ export const Label = styled.label`
 
 export const Input = styled.input`
     width: 70%;
-    padding: 12px 20px;
+    padding: 8px 20px;
     margin: 5% 0;
     border: 3px solid #ccc;
     -webkit-transition: 0.5s;
@@ -84,7 +84,7 @@ export const Input = styled.input`
 
 export const Button = styled.button`
     width: 70%;
-    height: 10%;
+    padding: 8px 20px;
 `
 
 export const OrWrap = styled.div`
@@ -122,7 +122,7 @@ export const SigninWrap = styled.div`
     display: flex;
     justify-content: center;
     width: 70%;
-    padding: 3% 0;
+    margin-top: 6%;
 `
 
 export const SigninText = styled.p`
