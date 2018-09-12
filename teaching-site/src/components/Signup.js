@@ -15,6 +15,7 @@ import {
     HR,
     Policy,
     PolicyText,
+    PolicyLink,
     SigninWrap,
     SigninText,
     SigninLink,
@@ -47,7 +48,7 @@ class SignUp extends Component {
                             <Input type='text' />
 
                             <Policy>
-                                <PolicyText>By clicking Join now, you agree to Website's User Agreement Privacy Policy, and Cookie Policy</PolicyText>
+                                <PolicyText>By clicking Join now, you agree to Website's <PolicyLink>User Agreement Privacy Policy</PolicyLink>, and <PolicyLink>Cookie Policy</PolicyLink></PolicyText>
                             </Policy>
 
                             <Button>Join now</Button>

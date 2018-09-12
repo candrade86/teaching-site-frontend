@@ -153,6 +153,14 @@ export const PolicyText = styled.p`
     text-align: center;
 `
 
+export const PolicyLink = styled.a`
+    color: black;
+    
+    &:hover {
+        cursor: pointer;
+    }
+`
+
 export const SigninWrap = styled.div`
     display: flex;
     justify-content: center;
