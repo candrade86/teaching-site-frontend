@@ -27,11 +27,12 @@ export const Slogan = styled.h1`
 `
 
 export const SignupWrap = styled.div`
-    max-width: 500px;
-    width: 90%;
-    height: 70vh;
+    max-width: 400px;
+    width: 100%;
+    height: 65vh;
+    background: whitesmoke;
 
-    border: solid white;
+    /* border: solid white; */
 `
 
 export const Signup = styled.div`
@@ -39,7 +40,7 @@ export const Signup = styled.div`
     width: 100%;
     height: 100%;
    
-    border: solid pink;
+    /* border: solid pink; */
 `
 
 export const Form = styled.form`
@@ -50,7 +51,7 @@ export const Form = styled.form`
     width: 100%;
     height: 100%;
 
-    border: solid red;
+    /* border: solid red; */
 `
 
 export const LabelWrap = styled.div`
@@ -58,19 +59,27 @@ export const LabelWrap = styled.div`
     bottom: -17px;
     width: 70%;
 
-    /* border: solid white; */
 `
 
 export const Label = styled.label`
     font-size: 1.6rem;
-    color: white;
+    color: darkgray;
     font-weight: 900;
 `
 
 export const Input = styled.input`
     width: 70%;
-    height: 10%;
+    padding: 12px 20px;
     margin: 5% 0;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+
+    &:focus {
+        border: 3px solid darkgrey;
+        
+    }
 `
 
 export const Button = styled.button`
@@ -84,7 +93,6 @@ export const OrWrap = styled.div`
     align-items: center;
     width: 70%;
     font-size: 1.6rem;
-    color: white;
     padding: 4% 0;
 `
 
@@ -96,7 +104,7 @@ export const HRWrap = styled.div`
 
 export const HR = styled.hr`
     align-self: flex-start;
-    color: white;
+    color: darkgray;
     width: 100%;
 `
 
@@ -106,7 +114,7 @@ export const Policy = styled.div`
 `
 export const PolicyText = styled.p`
     font-size: 1.4rem;
-    color: white;
+    color: darkgray;
     text-align: center;
 `
 
@@ -119,12 +127,12 @@ export const SigninWrap = styled.div`
 
 export const SigninText = styled.p`
     font-size: 1.7rem;
-    color: white;
+    color: black;
 `
 
 export const SigninLink = styled.a`
     font-size: 1.7rem;
-    color: white;
+    color: dodgerblue;
 `
 
 export const CopyrightWrap = styled.div`

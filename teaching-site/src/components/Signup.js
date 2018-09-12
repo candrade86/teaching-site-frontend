@@ -52,7 +52,7 @@ class SignUp extends Component {
                             <Button>Continue with Facebook</Button>
 
                             <SigninWrap>
-                                <SigninText>Already a student? &nbsp;</SigninText><SigninLink>Sign In</SigninLink>
+                                <SigninText>Already a student? &nbsp;</SigninText><SigninLink>Sign in</SigninLink>
                             </SigninWrap>
                         </Form>
                     </Signup>
