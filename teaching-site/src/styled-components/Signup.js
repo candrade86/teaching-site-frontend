@@ -115,6 +115,7 @@ export const Policy = styled.div`
 `
 export const PolicyText = styled.p`
     font-size: 1.4rem;
+    line-height: 1.2;
     color: darkgray;
     text-align: center;
 `
