@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import fb from '../assets/fb.png';
 
 import { fadeIn } from 'react-animations';
 const fadeInAnimation = keyframes`${fadeIn}`;
@@ -98,23 +97,6 @@ export const Button = styled.button`
     font-weight: 900;
     border-radius: 3px;
     border: none;
-
-    &:hover {
-        cursor: pointer;
-    }
-`
-
-export const FacebookButton = styled.div`
-    width: 85%;
-    padding: 8px 20px;
-    text-align: center;
-    font-size: 1.7rem;
-    color: white;
-    background: #3b5998 url(${fb});
-    background-size: auto 30px;
-    background-repeat: no-repeat;
-    border: none;
-    border-radius: 3px;
 
     &:hover {
         cursor: pointer;

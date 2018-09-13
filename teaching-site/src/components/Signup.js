@@ -10,7 +10,6 @@ import {
     LabelWrap,
     Label,
     Input,
-    FacebookButton,
     Button,
     OrWrap,
     HRWrap,
@@ -56,8 +55,7 @@ class SignUp extends Component {
                             <Button>Join now</Button>
                             <OrWrap><HRWrap><HR /></HRWrap>or<HRWrap><HR /></HRWrap></OrWrap>
 
-                            {/* <FacebookButton >Continue with Facebook</FacebookButton> */}
-                            <Facebook  />
+                            <Facebook />
 
                             <SigninWrap>
                                 <SigninText>Already a student? &nbsp;</SigninText><SigninLink>Sign in</SigninLink>

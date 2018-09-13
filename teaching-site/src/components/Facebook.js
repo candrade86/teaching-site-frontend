@@ -26,18 +26,18 @@ export default class Facebook extends Component {
     componentClicked = () => console.log('clicked');
 
   render() {
-           
 
     return (
-      <Fragment>
+      <div style={{width: '85%'}}>
          <FacebookLogin
-                appId='404977906697751'
-                autoLoad={true}
-                fields='name,email,picture'
-                onClick={this.componentClicked}
-                callback={this.responseFacebook} 
-            />
-      </Fragment>
+            appId='404977906697751'
+            autoLoad={true}
+            fields='name,email,picture'
+            onClick={this.componentClicked}
+            callback={this.responseFacebook}
+            cssClass='facebook-button'
+        />
+      </div>
     );
   }
 }

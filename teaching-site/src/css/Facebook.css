@@ -1,8 +1,16 @@
 .facebook-button{
-    width: 85%;
+    width: 100%;
     padding: 8px 20px;
     text-align: center;
     font-size: 1.7rem;
     color: white;
+    background: #3b5998 url('../assets/fb.png');
+    background-size: auto 30px;
+    background-repeat: no-repeat;
+    border: none;
     border-radius: 3px;
+}
+
+.facebook-button:hover {
+    cursor: pointer;
 }
