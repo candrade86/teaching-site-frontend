@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Fragment } from 'react';
 import FacebookLogin from 'react-facebook-login';
 
 import '../css/Facebook.css'

@@ -27,8 +27,6 @@ import {
     Slogan    
 } from '../styled-components/Signup';
 
-import fb from '../assets/fb.png';
-
 class SignUp extends Component {
     render(){
         return (
