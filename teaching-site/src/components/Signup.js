@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { withRouter } from 'react-router';
 import Facebook from './Facebook';
 
 import { 
@@ -56,7 +56,7 @@ class SignUp extends Component {
                             <Facebook />
 
                             <SigninWrap>
-                                <SigninText>Already a student? &nbsp;</SigninText><SigninLink>Sign in</SigninLink>
+                                <SigninText>Already a student? &nbsp;</SigninText><SigninLink onClick={ ()=> this.props.history.push("/signin")}>Sign in</SigninLink>
                             </SigninWrap>
                         </Form>
                     </Signup>
@@ -70,4 +70,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp);
