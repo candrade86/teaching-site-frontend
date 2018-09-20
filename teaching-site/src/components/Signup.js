@@ -28,7 +28,24 @@ import {
 } from '../styled-components/Signup';
 
 class SignUp extends Component {
-    render(){
+    constructor(props) {
+        super(props);
+        this.state = {
+          email: "",
+          password: "",
+          signUpError: ""
+        };
+
+        this.handleInput = this.handleInput.bind(this);
+    }
+   
+handleInput(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+}
+
+
+    render() {
         return (
             <Container>
                 <TitleWrap>
@@ -40,11 +57,23 @@ class SignUp extends Component {
                     <Signup>
                         <Form>
                             <LabelWrap><Label>Email</Label></LabelWrap>
-                            <Input type='text' />
+                            <Input 
+                                name='email' 
+                                type='text' 
+                                autoComplete='none' 
+                                onChange={this.handleInput}
+                                value={this.state.email}
+                            />
                             
 
                             <LabelWrap><Label>Password (6 or more characters)</Label></LabelWrap>
-                            <Input type='text' />
+                            <Input
+                                name='password' 
+                                type='text'
+                                autoComplete='none' 
+                                onChange={this.handleInput}
+                                value={this.state.password} 
+                            />
 
                             <Policy>
                                 <PolicyText>By clicking Join now, you agree to Website's <PolicyLink>User Agreement Privacy Policy</PolicyLink>, and <PolicyLink>Cookie Policy</PolicyLink></PolicyText>
