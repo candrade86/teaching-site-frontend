@@ -33,10 +33,10 @@ class SignUp extends Component {
         this.state = {
           email: "",
           password: "",
-          signUpError: ""
         };
 
         this.handleInput = this.handleInput.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
    
 handleInput(event) {
@@ -44,6 +44,15 @@ handleInput(event) {
     this.setState({ [name]: value });
 }
 
+onSubmit(event) {
+    event.preventDefault();
+    let formProps = this.state;
+    
+    this.props.signUp(formProps, () => {
+        this.props.history.push("/home");
+    });
+        
+  };
 
     render() {
         return (
