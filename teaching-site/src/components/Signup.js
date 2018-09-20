@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Facebook from './Facebook';
 
@@ -26,6 +27,8 @@ import {
     Title,
     Slogan    
 } from '../styled-components/Signup';
+
+import { signUp } from '../actions';
 
 class SignUp extends Component {
     constructor(props) {
@@ -78,7 +81,7 @@ onSubmit(event) {
                             <LabelWrap><Label>Password (6 or more characters)</Label></LabelWrap>
                             <Input
                                 name='password' 
-                                type='text'
+                                type='password'
                                 autoComplete='none' 
                                 onChange={this.handleInput}
                                 value={this.state.password} 
@@ -108,4 +111,5 @@ onSubmit(event) {
     }
 }
 
-export default withRouter(SignUp);
+
+export default connect(null, { signUp })(withRouter(SignUp));
