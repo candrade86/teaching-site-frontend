@@ -64,7 +64,7 @@ onSubmit(event) {
 
                 <SignupWrap>
                     <Signup>
-                        <Form>
+                        <Form onSubmit={this.onSubmit}>
                             <LabelWrap><Label>Email</Label></LabelWrap>
                             <Input 
                                 name='email' 
