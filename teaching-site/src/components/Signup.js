@@ -34,8 +34,9 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          email: "",
-          password: "",
+          username: '',
+          email: '',
+          password: '',
         };
 
         this.handleInput = this.handleInput.bind(this);
@@ -75,7 +76,7 @@ onSubmit(event) {
                                 type='text' 
                                 autoComplete='none' 
                                 onChange={this.handleInput}
-                                value={this.state.email}
+                                value={this.state.username}
                             />
 
                             <LabelWrap><Label>Email</Label></LabelWrap>
