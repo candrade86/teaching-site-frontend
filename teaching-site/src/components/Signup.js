@@ -30,6 +30,8 @@ import {
 
 import { signUp } from '../actions';
 
+import jwt_decode from "jwt-decode";
+
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +55,10 @@ onSubmit(event) {
     let formProps = this.state;
     
     this.props.signUp(formProps, () => {
-        this.props.history.push("/home");
+        const token = localStorage.getItem("token");
+        const decoded = jwt_decode(token);
+        let  username = decoded.username
+        this.props.history.push(`/student/${username}`);
     });
         
   };

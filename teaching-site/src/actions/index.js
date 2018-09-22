@@ -6,6 +6,8 @@ import {
     ERROR
 } from './types';
 
+import jwt_decode from "jwt-decode";
+
 export const signUp = (formProps, callback) => dispatch => {
     dispatch({ type: SIGNING_UP }); 
   
@@ -14,6 +16,7 @@ export const signUp = (formProps, callback) => dispatch => {
         formProps
         )
         .then(response => {
+            localStorage.setItem('token', response.data.token);
             dispatch({ type: AUTH_USER, payload: response.data.token })
             callback();
         })
