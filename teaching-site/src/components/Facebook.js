@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { signUp } from '../actions';
 import FacebookLogin from 'react-facebook-login';
 
 import '../css/Facebook.css'
 
-export default class Facebook extends Component {
-    state = {
-        isLoggedIn: false,
-        userID: '',
-        name: '',
-        email: '',
-        picture: ''
-    }
+class Facebook extends Component {
 
-    responseFacebook = response => {
+    responseFacebook = (response, callback) => {
         console.log(response);
         this.setState({
             isLoggedIn: true,
@@ -40,4 +36,6 @@ export default class Facebook extends Component {
     );
   }
 }
+
+export default connect(null, { signUp })(withRouter(Facebook));
     

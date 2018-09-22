@@ -22,3 +22,4 @@ export const signUp = (formProps, callback) => dispatch => {
             dispatch({ type: ERROR, errorMessage: 'Username already in use.', err})
         });
   };
+

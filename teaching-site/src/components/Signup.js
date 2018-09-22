@@ -68,6 +68,16 @@ onSubmit(event) {
                 <SignupWrap>
                     <Signup>
                         <Form onSubmit={this.onSubmit}>
+
+                            <LabelWrap><Label>Username</Label></LabelWrap>
+                            <Input 
+                                name='username' 
+                                type='text' 
+                                autoComplete='none' 
+                                onChange={this.handleInput}
+                                value={this.state.email}
+                            />
+
                             <LabelWrap><Label>Email</Label></LabelWrap>
                             <Input 
                                 name='email' 
@@ -76,7 +86,6 @@ onSubmit(event) {
                                 onChange={this.handleInput}
                                 value={this.state.email}
                             />
-                            
 
                             <LabelWrap><Label>Password (6 or more characters)</Label></LabelWrap>
                             <Input
