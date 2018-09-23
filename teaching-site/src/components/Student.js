@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import requireAuth from '../hoc/requireAuth';
 
-export default class Home extends Component {
+class Student extends Component {
   render() {
     return (
       <div>
@@ -9,3 +10,5 @@ export default class Home extends Component {
     )
   }
 }
+
+export default requireAuth(Student)
