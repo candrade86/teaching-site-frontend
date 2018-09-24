@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import jwt_decode from "jwt-decode";
 
 export default ChildComponent => {
@@ -14,9 +13,9 @@ export default ChildComponent => {
     }
 
     shouldNavigateAway() {
-        const token = localStorage.getItem("token");  
-      if (token) {
-        
+      const token = localStorage.getItem("token");
+
+      if (token) {  
         const decoded = jwt_decode(token);
         let username = decoded.username;
 
@@ -29,9 +28,5 @@ export default ChildComponent => {
     }
   }
 
-  function mapStateToProps(state) {
-    return { auth: state.auth.authenticated };
-  }
-
-  return connect(mapStateToProps)(ComposedComponent);
+  return ComposedComponent;
 };
