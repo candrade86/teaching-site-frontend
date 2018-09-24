@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import jwt_decode from "jwt-decode";
 
 export default ChildComponent => {
@@ -26,9 +25,5 @@ export default ChildComponent => {
     }
   }
 
-  function mapStateToProps(state) {
-    return { auth: state.auth.authenticated };
-  }
-
-  return connect(mapStateToProps)(ComposedComponent);
+  return ComposedComponent;
 };
