@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Facebook from './Facebook';
+import profileRedirect from '../hoc/profileRedirect';
 
 import { 
     Container,
@@ -127,4 +128,4 @@ onSubmit(event) {
 }
 
 
-export default connect(null, { signUp })(withRouter(SignUp));
+export default connect(null, { signUp })(profileRedirect(withRouter(SignUp)));

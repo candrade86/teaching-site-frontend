@@ -14,11 +14,14 @@ export default ChildComponent => {
     }
 
     shouldNavigateAway() {
-      const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");  
+      if (token) {
+        
+        const decoded = jwt_decode(token);
+        let username = decoded.username;
 
-      if (!token) {
-        this.props.history.push('/');
-      } 
+        this.props.history.push(`/student/${username}`);
+      }
     }
 
     render() {
