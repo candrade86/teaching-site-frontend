@@ -3,9 +3,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import requireAuth from '../hoc/requireAuth';
 import { signOut } from '../actions';
+import jwt_decode from 'jwt-decode';
 
 class Student extends Component {
+  componentDidMount() {
+    
+  }
   render() {
+    const token = localStorage.getItem("token");
+    const decoded = jwt_decode(token);
+    let  username = decoded.username
     return (
       <div>
         <h1 style={{fontSize: '3rem'}} 
@@ -13,7 +20,7 @@ class Student extends Component {
             this.props.history.push('/');
           })
         
-          }>LOG OUT </h1>
+          }>{username} LOG OUT </h1>
         <h1>HOME PAGE</h1>
       </div>
     )
