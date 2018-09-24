@@ -26,8 +26,9 @@ export const signUp = (formProps, callback) => dispatch => {
         });
   };
 
-export const signOut = () => {
+export const signOut = (callback) => {
     localStorage.removeItem("token");
+    callback();
     return {
       type: AUTH_USER,
       payload: ""

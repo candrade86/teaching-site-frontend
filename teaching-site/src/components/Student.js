@@ -17,7 +17,7 @@ class Student extends Component {
       <div>
         <h1 style={{fontSize: '3rem'}} 
           onClick={()=> this.props.signOut(()=> {
-            this.props.history.push('/');
+            this.props.history.push('/signin');
           })
         
           }>{username} LOG OUT </h1>
