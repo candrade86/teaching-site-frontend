@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { signIn } from '../actions';
+
 import profileRedirect from '../hoc/profileRedirect';
+import Spinner from '../components/UI/Spinner';
+
 import jwt_decode from "jwt-decode";
+
+
 
 import { 
     Container,
@@ -54,8 +59,15 @@ onSubmit(event) {
   };
 
   render() {
+    let spinner;
+
+    if (this.props.signingIn === true) {
+        spinner = <Spinner />;
+      }
+
     return (
         <Container>
+            {spinner}
             <TitleWrap>
                 <Title>Sign in</Title>
                 <Slogan>Catchy teaching website slogan here.</Slogan>
@@ -85,7 +97,7 @@ onSubmit(event) {
                         <OrWrap><HRWrap><HR /></HRWrap></OrWrap>
 
                         <Button>Sign in</Button>
-
+                    {console.log(this.props.signingIn)}
                     </Form>
                 </SigninInner> 
             </SigninWrap>
@@ -94,4 +106,11 @@ onSubmit(event) {
   }
 }
 
-export default connect(null, { signIn })(profileRedirect(withRouter(Signin)));
+
+function mapStateToProps(state) {
+    return {
+        signingIn: state.auth.signingIn
+    };
+  }
+
+export default connect(mapStateToProps, { signIn })(profileRedirect(withRouter(Signin)));

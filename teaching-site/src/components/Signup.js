@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Facebook from './Facebook';
 import profileRedirect from '../hoc/profileRedirect';
+import Spinner from '../components/UI/Spinner';
 
 import { 
     Container,
@@ -65,8 +66,15 @@ onSubmit(event) {
   };
 
     render() {
+        let spinner;
+
+        if (this.props.signingUp === true) {
+            spinner = <Spinner />;
+        }
+
         return (
             <Container>
+                {spinner}
                 <TitleWrap>
                     <Title>Sign up</Title>
                     <Slogan>Catchy teaching website slogan here.</Slogan>
@@ -127,5 +135,10 @@ onSubmit(event) {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        signingUp: state.auth.signingUp
+    };
+  }
 
-export default connect(null, { signUp })(profileRedirect(withRouter(SignUp)));
+export default connect(mapStateToProps, { signUp })(profileRedirect(withRouter(SignUp)));

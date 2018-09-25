@@ -14,7 +14,7 @@ export default function(state = INITIAL_STATE, action) {
     case SIGNING_UP:
         return { ...state, signingUp: true };
     case AUTH_USER:
-        return { ...state, authenticated: action.payload };
+        return { ...state, authenticated: action.payload.token, signingIn: false, signingUp: false };
     case ERROR:
         return { ...state, errorMessage: action.errorMessage };
     default:
