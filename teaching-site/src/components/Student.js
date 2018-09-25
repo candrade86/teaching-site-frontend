@@ -5,6 +5,13 @@ import requireAuth from '../hoc/requireAuth';
 import { signOut } from '../actions';
 import jwt_decode from 'jwt-decode';
 
+import {  
+  Container,
+  Top,
+  Logout,
+  Middle
+} from '../styled-components/Student';
+
 class Student extends Component {
   componentDidMount() {
     
@@ -14,15 +21,21 @@ class Student extends Component {
     const decoded = jwt_decode(token);
     let  username = decoded.username
     return (
-      <div>
-        <h1 style={{fontSize: '3rem'}} 
-          onClick={()=> this.props.signOut(()=> {
-            this.props.history.push('/signin');
-          })
-        
-          }>{username} LOG OUT </h1>
-        <h1>HOME PAGE</h1>
-      </div>
+      <Container>
+        <Top>
+          <Logout 
+            onClick={()=> this.props.signOut(()=> {
+              this.props.history.push('/signin');
+            })
+          
+          }> 
+            Logout as {username}
+          </Logout>
+  
+        </Top>
+        <Middle>
+        </Middle>
+      </Container>
     )
   }
 }
