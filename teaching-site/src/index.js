@@ -9,6 +9,7 @@ import App from './components/App';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Student from './components/Student';
+import Scheduler from './components/Scheduler';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -18,7 +19,8 @@ ReactDOM.render(
             <App>
                 <Route path='/' exact component={Signup} />
                 <Route path='/signin' component={Signin} />
-                <Route path='/student/:id' component={Student} />    
+                <Route path='/student/:id' component={Student} />
+                <Route path='/scheduler' component={Scheduler} />    
             </App>
         </BrowserRouter>
     </Root>
