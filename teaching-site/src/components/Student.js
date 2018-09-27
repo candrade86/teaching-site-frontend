@@ -9,7 +9,8 @@ import {
   Container,
   Top,
   Logout,
-  Middle
+  Middle,
+  Schedule
 } from '../styled-components/Student';
 
 class Student extends Component {
@@ -34,6 +35,11 @@ class Student extends Component {
   
         </Top>
         <Middle>
+          <Schedule
+            onClick={()=> this.props.history.push('/scheduler')}
+          > 
+            Shedule a session 
+          </Schedule>
         </Middle>
       </Container>
     )

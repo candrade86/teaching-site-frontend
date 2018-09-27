@@ -28,6 +28,17 @@ export const Logout = styled.p`
 `
 
 export const Middle = styled.div`
+    display: flex;
+    justify-content: center;
 
     /* border: solid purple; */
+`
+
+export const Schedule = styled.p`
+    color: white;
+    font-size: 3rem;
+     &:hover {
+         font-size: 3.2rem;
+     }
+
 `

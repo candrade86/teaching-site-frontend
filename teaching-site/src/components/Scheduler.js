@@ -100,16 +100,7 @@ class Scheduler extends Component {
             onSelectSlot={this.newEvent}
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
-            style={{ height: '100vh', background: 'white' }}
-
-            // localizer={localizer}
-            // defaultDate={new Date()}
-            // defaultView='month'
-            // events={this.state.events}
-            // onEventDrop={this.onEventDrop}
-            // onEventResize={this.ondEventResize}
-            // resizable
-            
+            style={{  background: 'white' }}            
           />
       </Container>
     )
