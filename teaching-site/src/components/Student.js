@@ -28,7 +28,6 @@ class Student extends Component {
             onClick={()=> this.props.signOut(()=> {
               this.props.history.push('/signin');
             })
-          
           }> 
             Logout as {username}
           </Logout>

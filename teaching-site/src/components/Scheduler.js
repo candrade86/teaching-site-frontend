@@ -29,9 +29,23 @@ class Scheduler extends Component {
         }
     
         this.moveEvent = this.moveEvent.bind(this)
-        this.newEvent = this.newEvent.bind(this)
       }
     
+      handleSelect = ({ start, end }) => {
+        const title = window.prompt('New Event name')
+        if (title)
+          this.setState({
+            events: [
+              ...this.state.events,
+              {
+                start,
+                end,
+                title,
+              },
+            ],
+          })
+      }
+
       moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
         const { events } = this.state
     
@@ -72,20 +86,20 @@ class Scheduler extends Component {
         //alert(`${event.title} was resized to ${start}-${end}`)
       }
     
-      newEvent(event) {
-        let idList = this.state.events.map(a => a.id)
-        let newId = Math.max(...idList) + 1
-        let hour = {
-          id: newId,
-          title: 'New Event',
-          allDay: event.slots.length == 1,
-          start: event.start,
-          end: event.end,
-        }
-        this.setState({
-          events: this.state.events.concat([hour]),
-        })
-      }
+      // newEvent(event) {
+      //   let idList = this.state.events.map(a => a.id)
+      //   let newId = Math.max(...idList) + 1
+      //   let hour = {
+      //     id: newId,
+      //     title: 'New Event',
+      //     allDay: event.slots.length == 1,
+      //     start: event.start,
+      //     end: event.end,
+      //   }
+      //   this.setState({
+      //     events: this.state.events.concat([hour]),
+      //   })
+      // }
 
   render() {
     return (
@@ -97,7 +111,8 @@ class Scheduler extends Component {
             onEventDrop={this.moveEvent}
             resizable
             onEventResize={this.resizeEvent}
-            onSelectSlot={this.newEvent}
+            onSelectSlot={this.handleSelect}
+            onSelectEvent={event => alert(event.title)}
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
             style={{  background: 'white' }}            
