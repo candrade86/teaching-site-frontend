@@ -10,46 +10,106 @@ import {
     Container
 } from '../styled-components/Scheduler';
 
-// Calendar.setLocalizer(Calendar.momentLocalizer(moment));
 const localizer = Calendar.momentLocalizer(moment)
 
-const DnDCalendar = withDragAndDrop(Calendar);
+const DragAndDropCalendar = withDragAndDrop(Calendar);
 
 class Scheduler extends Component {
-    state = {
-        events:[
-            {
-                start: new Date(),
-                end: new Date(moment().add(1, 'days')),
-                title: 'Carlos is amazing'
-            }
-        ]
-    };
-
-    onEventResize = (type, { event, start, end, allDay }) => {
-        this.setState(state => {
-            state.events[0].start = start;
-            state.events[0].end = end;
-            return { events: state.events };
-        });
-    };
-
-    onEventDrop = ({ event, start, end, allday}) => {
-        console.log(start);
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+          events: [
+              {
+              id: 0,
+              title: 'Party on Mars',
+              start: new Date(2018, 11, 11),
+              end: new Date(2018, 11, 11)
+              }
+          ]
+        }
+    
+        this.moveEvent = this.moveEvent.bind(this)
+        this.newEvent = this.newEvent.bind(this)
+      }
+    
+      moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
+        const { events } = this.state
+    
+        const idx = events.indexOf(event)
+        let allDay = event.allDay
+    
+        if (!event.allDay && droppedOnAllDaySlot) {
+          allDay = true
+        } else if (event.allDay && !droppedOnAllDaySlot) {
+          allDay = false
+        }
+    
+        const updatedEvent = { ...event, start, end, allDay }
+    
+        const nextEvents = [...events]
+        nextEvents.splice(idx, 1, updatedEvent)
+    
+        this.setState({
+          events: nextEvents,
+        })
+    
+        // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
+      }
+    
+      resizeEvent = ({ event, start, end }) => {
+        const { events } = this.state
+    
+        const nextEvents = events.map(existingEvent => {
+          return existingEvent.id == event.id
+            ? { ...existingEvent, start, end }
+            : existingEvent
+        })
+    
+        this.setState({
+          events: nextEvents,
+        })
+    
+        //alert(`${event.title} was resized to ${start}-${end}`)
+      }
+    
+      newEvent(event) {
+        let idList = this.state.events.map(a => a.id)
+        let newId = Math.max(...idList) + 1
+        let hour = {
+          id: newId,
+          title: 'New Event',
+          allDay: event.slots.length == 1,
+          start: event.start,
+          end: event.end,
+        }
+        this.setState({
+          events: this.state.events.concat([hour]),
+        })
+      }
 
   render() {
     return (
       <Container>
-          <DnDCalendar
+          <DragAndDropCalendar
+            selectable
             localizer={localizer}
-            defaultDate={new Date()}
-            defaultView='month'
             events={this.state.events}
-            onEventDrop={this.onEventDrop}
-            onEventResize={this.ondEventResize}
+            onEventDrop={this.moveEvent}
             resizable
+            onEventResize={this.resizeEvent}
+            onSelectSlot={this.newEvent}
+            defaultView={Calendar.Views.WEEK}
+            defaultDate={new Date()}
             style={{ height: '100vh', background: 'white' }}
+
+            // localizer={localizer}
+            // defaultDate={new Date()}
+            // defaultView='month'
+            // events={this.state.events}
+            // onEventDrop={this.onEventDrop}
+            // onEventResize={this.ondEventResize}
+            // resizable
+            
           />
       </Container>
     )
