@@ -13,6 +13,7 @@ export const Header = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    height: 10vh;
 
     /* border: solid red; */
 `
