@@ -10,8 +10,8 @@ import {
     Container
 } from '../styled-components/Scheduler';
 
-const localizer = Calendar.momentLocalizer(moment)
 
+const localizer = Calendar.momentLocalizer(moment)
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
 class Scheduler extends Component {
@@ -106,6 +106,7 @@ class Scheduler extends Component {
       <Container>
           <DragAndDropCalendar
             selectable
+            culture={moment.tz.guess()}
             localizer={localizer}
             events={this.state.events}
             onEventDrop={this.moveEvent}
@@ -115,7 +116,9 @@ class Scheduler extends Component {
             onSelectEvent={event => alert(event.title)}
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
-            style={{  background: 'white' }}            
+            style={{  background: 'white' }}
+            views={{ week: true, day: true }}    
+            step={60}        
           />
       </Container>
     )
