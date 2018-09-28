@@ -135,7 +135,7 @@ class Scheduler extends Component {
             onSelectEvent={event => alert(event.title)}
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
-            style={{  background: 'white' }}
+            style={{ fontSize: '2rem', height: '100vh', width: '100%', background: 'white' }}
             views={{ week: true, day: true }}            
           />
       </Container>
