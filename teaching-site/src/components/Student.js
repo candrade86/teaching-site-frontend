@@ -35,7 +35,7 @@ class Student extends Component {
         </Top>
         <Middle>
           <Schedule
-            onClick={()=> this.props.history.push('/scheduler')}
+            onClick={()=> this.props.history.push(`/scheduler/${username}`)}
           > 
             Shedule a session 
           </Schedule>

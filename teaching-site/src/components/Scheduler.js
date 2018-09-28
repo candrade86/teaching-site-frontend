@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import requireAuth from '../hoc/requireAuth';
+
 import Calendar from 'react-big-calendar';
 import moment from 'moment-timezone';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
@@ -117,12 +119,11 @@ class Scheduler extends Component {
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
             style={{  background: 'white' }}
-            views={{ week: true, day: true }}    
-            step={60}        
+            views={{ week: true, day: true }}            
           />
       </Container>
     )
   }
 }
 
-export default Scheduler;
+export default requireAuth(Scheduler);
