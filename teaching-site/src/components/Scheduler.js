@@ -21,6 +21,10 @@ import jwt_decode from 'jwt-decode';
 const localizer = Calendar.momentLocalizer(moment)
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
+const token = localStorage.getItem("token");
+const decoded = jwt_decode(token);
+let  username = decoded.username
+
 class Scheduler extends Component {
     constructor(props) {
         super(props)
@@ -38,16 +42,21 @@ class Scheduler extends Component {
         this.moveEvent = this.moveEvent.bind(this)
       }
     
+
+
       handleSelect = ({ start, end }) => {
-        const title = window.prompt('New Event name')
+        let idList = this.state.events.map(a => a.id)
+        let newId = Math.max(...idList) + 1
+        const title = username;
         if (title)
           this.setState({
             events: [
               ...this.state.events,
               {
-                start,
-                end,
+                id: newId,
                 title,
+                start,
+                end
               },
             ],
           })
@@ -74,7 +83,7 @@ class Scheduler extends Component {
           events: nextEvents,
         })
     
-        // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
+        alert(`${event.title} was dropped onto ${updatedEvent.start}`)
       }
     
       resizeEvent = ({ event, start, end }) => {
@@ -90,28 +99,13 @@ class Scheduler extends Component {
           events: nextEvents,
         })
     
-        //alert(`${event.title} was resized to ${start}-${end}`)
+        alert(`${event.title} was resized to ${start}-${end}`)
       }
     
-      // newEvent(event) {
-      //   let idList = this.state.events.map(a => a.id)
-      //   let newId = Math.max(...idList) + 1
-      //   let hour = {
-      //     id: newId,
-      //     title: 'New Event',
-      //     allDay: event.slots.length == 1,
-      //     start: event.start,
-      //     end: event.end,
-      //   }
-      //   this.setState({
-      //     events: this.state.events.concat([hour]),
-      //   })
-      // }
+   
 
   render() {
-    const token = localStorage.getItem("token");
-    const decoded = jwt_decode(token);
-    let  username = decoded.username
+
     return (
       <Container>
           <Header>
@@ -144,3 +138,34 @@ class Scheduler extends Component {
 }
 
 export default connect(null, { signOut })(requireAuth(Scheduler));
+
+      // handleSelect = ({ start, end }) => {
+      //   const title = username;
+      //   if (title)
+      //     this.setState({
+      //       events: [
+      //         ...this.state.events,
+      //         {
+      //           id,
+      //           start,
+      //           end,
+      //           title,
+      //         },
+      //       ],
+      //     })
+      // }
+
+      //    newEvent(event) {
+      //   let idList = this.state.events.map(a => a.id)
+      //   let newId = Math.max(...idList) + 1
+      //   let hour = {
+      //     id: newId,
+      //     title: 'New Event',
+      //     allDay: event.slots.length == 1,
+      //     start: event.start,
+      //     end: event.end,
+      //   }
+      //   this.setState({
+      //     events: this.state.events.concat([hour]),
+      //   })
+      // }

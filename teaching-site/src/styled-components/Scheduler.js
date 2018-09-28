@@ -14,7 +14,7 @@ export const Header = styled.div`
     justify-content: flex-end;
     width: 100%;
 
-    border: solid red;
+    /* border: solid red; */
 `
 
 export const Logout = styled.p`
