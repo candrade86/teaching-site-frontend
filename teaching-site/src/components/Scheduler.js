@@ -12,6 +12,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import {
     Container,
+    Header,
     Logout
 } from '../styled-components/Scheduler';
 
@@ -113,7 +114,7 @@ class Scheduler extends Component {
     let  username = decoded.username
     return (
       <Container>
-          <div>
+          <Header>
           <Logout 
             onClick={()=> this.props.signOut(()=> {
               this.props.history.push('/signin');
@@ -121,7 +122,7 @@ class Scheduler extends Component {
           }> 
             Logout as {username}
           </Logout>
-          </div>
+          </Header>
           <DragAndDropCalendar
             selectable
             culture={moment.tz.guess()}
