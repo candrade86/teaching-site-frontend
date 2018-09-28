@@ -8,3 +8,12 @@ export const Container = styled.div`
     width: 100%;
     min-height: 100vh;
 `
+export const Logout = styled.p`
+    font-size: 2rem;
+    color: white;
+    padding: 2%;
+
+    &:hover {
+        cursor: pointer;
+    }
+`

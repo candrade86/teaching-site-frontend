@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { signOut } from '../actions';
 import requireAuth from '../hoc/requireAuth';
 
 import Calendar from 'react-big-calendar';
@@ -9,9 +11,11 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import {
-    Container
+    Container,
+    Logout
 } from '../styled-components/Scheduler';
 
+import jwt_decode from 'jwt-decode';
 
 const localizer = Calendar.momentLocalizer(moment)
 const DragAndDropCalendar = withDragAndDrop(Calendar);
@@ -104,8 +108,20 @@ class Scheduler extends Component {
       // }
 
   render() {
+    const token = localStorage.getItem("token");
+    const decoded = jwt_decode(token);
+    let  username = decoded.username
     return (
       <Container>
+          <div>
+          <Logout 
+            onClick={()=> this.props.signOut(()=> {
+              this.props.history.push('/signin');
+            })
+          }> 
+            Logout as {username}
+          </Logout>
+          </div>
           <DragAndDropCalendar
             selectable
             culture={moment.tz.guess()}
@@ -126,4 +142,4 @@ class Scheduler extends Component {
   }
 }
 
-export default requireAuth(Scheduler);
+export default connect(null, { signOut })(requireAuth(Scheduler));
