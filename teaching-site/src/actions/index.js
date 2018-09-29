@@ -4,20 +4,18 @@ import {
     SIGNING_UP,
     SIGNING_IN,
     AUTH_USER,
+    FETCHING_EVENTS,
+    FETCHED_EVENTS,
     ERROR
 } from './types';
 
 import jwt_decode from "jwt-decode";
 
-const REACT_APP_DEV_API_URL = 'https://thawing-anchorage-13825.herokuapp.com';
-const apiUrl = process.env.NODE_ENV === 'production' ? 'http://localhost:5000' : process.env.REACT_APP_DEV_API_URL;
-
-
 export const signUp = (formProps, callback) => dispatch => {
     dispatch({ type: SIGNING_UP }); 
   
     axios
-        .post (`${apiUrl}/api/authentication/signup`, 
+        .post ('http://localhost:5000/api/authentication/signup', 
         formProps
         )
         .then(response => {
