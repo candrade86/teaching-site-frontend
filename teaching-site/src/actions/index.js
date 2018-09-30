@@ -6,6 +6,8 @@ import {
     AUTH_USER,
     FETCHING_EVENTS,
     FETCHED_EVENTS,
+    CREATING_EVENT,
+    CREATED_EVENT,
     ERROR
 } from './types';
 
@@ -54,5 +56,22 @@ export const signOut = (callback) => {
       type: AUTH_USER,
       payload: ""
     };
-  };  
+  };
+
+// export const createEvent = (eventProps) => {
+//     dispatch({ type: CREATING_EVENT }); 
+  
+//     axios
+//         .post ("http://localhost:5000/api/event/create-event",
+//         eventProps
+//         )
+//         .then(response => {
+//             dispatch({ type: AUTH_USER, payload: response.data.token })
+//             localStorage.setItem("token", response.data.token)
+//             callback();
+//         })
+//         .catch(err => {
+//             dispatch({ type: ERROR, errorMessage: 'User not found.', err})
+//         });
+// }
 

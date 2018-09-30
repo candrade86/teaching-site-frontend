@@ -101,8 +101,6 @@ class Scheduler extends Component {
     
         alert(`${event.title} was resized to ${start}-${end}`)
       }
-    
-   
 
   render() {
 
@@ -137,7 +135,32 @@ class Scheduler extends Component {
   }
 }
 
-export default connect(null, { signOut })(requireAuth(Scheduler));
+function mapStateToProps(state) {
+  return {
+      events: state.event.events
+  };
+}
+
+export default connect(mapStateToProps)(requireAuth(Scheduler));
+
+      // handleSelect = ({ start, end }) => {
+      //   let idList = this.state.events.map(a => a.id)
+      //   let newId = Math.max(...idList) + 1
+      //   const title = username;
+      //   if (title)
+      //     this.setState({
+      //       events: [
+      //         ...this.state.events,
+      //         {
+      //           id: newId,
+      //           title,
+      //           start,
+      //           end
+      //         },
+      //       ],
+      //     })
+      // }
+
 
       // handleSelect = ({ start, end }) => {
       //   const title = username;

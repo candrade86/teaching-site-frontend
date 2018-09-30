@@ -1,8 +1,15 @@
-import { ERROR, FETCHING_EVENTS, FETCHED_EVENTS } from "../actions/types";
+import { 
+    ERROR,
+    FETCHING_EVENTS, 
+    FETCHED_EVENTS, 
+    CREATING_EVENT,
+    CREATED_EVENT 
+} from "../actions/types";
 
 const INITIAL_STATE = {
     events: [],
     fetchingEvents: false,
+    creatingEvent: false,
     errorMessage: "",
  
 };
@@ -12,7 +19,11 @@ export default function(state = INITIAL_STATE, action) {
     case FETCHING_EVENTS:
         return { ...state, fetchingEvents: true };
     case FETCHED_EVENTS:
-        return { ...state, events: [ ...state.events, action.payload ], fetchingEvents: false };
+        return { ...state, events: action.payload, fetchingEvents: false };
+    case CREATING_EVENT:
+        return { ...state, creatingEvent: true };
+    case CREATED_EVENT:
+        return { ...state, events: [ ...state.events, action.payload ], creatingEvent: false };
     case ERROR:
         return { ...state, errorMessage: action.errorMessage };
     default:
