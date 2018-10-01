@@ -58,20 +58,18 @@ export const signOut = (callback) => {
     };
   };
 
-// export const createEvent = (eventProps) => {
-//     dispatch({ type: CREATING_EVENT }); 
+export const createEvent = eventProps => dispatch =>  {
+    dispatch({ type: CREATING_EVENT }); 
   
-//     axios
-//         .post ("http://localhost:5000/api/event/create-event",
-//         eventProps
-//         )
-//         .then(response => {
-//             dispatch({ type: AUTH_USER, payload: response.data.token })
-//             localStorage.setItem("token", response.data.token)
-//             callback();
-//         })
-//         .catch(err => {
-//             dispatch({ type: ERROR, errorMessage: 'User not found.', err})
-//         });
-// }
+    axios
+        .post ("http://localhost:5000/api/event/create-event",
+        eventProps
+        )
+        .then(response => {
+            dispatch({ type: CREATED_EVENT, payload: response.data })
+        })
+        .catch(err => {
+            dispatch({ type: ERROR, errorMessage: 'User not found.', err})
+        });
+}
 
