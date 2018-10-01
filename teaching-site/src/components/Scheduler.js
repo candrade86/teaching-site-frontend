@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signOut } from '../actions';
+import { signOut, createEvent } from '../actions';
 import requireAuth from '../hoc/requireAuth';
 
 import Calendar from 'react-big-calendar';
@@ -45,21 +45,13 @@ class Scheduler extends Component {
 
 
       handleSelect = ({ start, end }) => {
-        let idList = this.state.events.map(a => a.id)
-        let newId = Math.max(...idList) + 1
+        // let idList = this.state.events.map(a => a.id)
+        // let newId = Math.max(...idList) + 1
         const title = username;
-        if (title)
-          this.setState({
-            events: [
-              ...this.state.events,
-              {
-                id: newId,
-                title,
-                start,
-                end
-              },
-            ],
-          })
+        const eventProps = {  title, start, end }
+        if (title) {
+          this.props.createEvent(eventProps)
+        }
       }
 
       moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
@@ -141,7 +133,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(requireAuth(Scheduler));
+export default connect(mapStateToProps, { createEvent })(requireAuth(Scheduler));
 
       // handleSelect = ({ start, end }) => {
       //   let idList = this.state.events.map(a => a.id)

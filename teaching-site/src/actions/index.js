@@ -69,7 +69,7 @@ export const createEvent = eventProps => dispatch =>  {
             dispatch({ type: CREATED_EVENT, payload: response.data })
         })
         .catch(err => {
-            dispatch({ type: ERROR, errorMessage: 'User not found.', err})
+            dispatch({ type: ERROR, errorMessage: 'Error creating event.', err})
         });
 }
 
