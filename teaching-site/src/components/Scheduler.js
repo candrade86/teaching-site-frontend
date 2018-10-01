@@ -29,23 +29,22 @@ class Scheduler extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          events: [
-              {
-              id: 0,
-              title: 'Party on Mars',
-              start: new Date(2018, 11, 11),
-              end: new Date(2018, 11, 11)
-              }
-          ]
+          events: []
         }
     
         this.moveEvent = this.moveEvent.bind(this)
       }
     
-
+      componentDidMount() {
+        this.setState({events: this.props.events })
+      }
 
       handleSelect = ({ start, end }) => {
-        // let idList = this.state.events.map(a => a.id)
+        let idList = this.state.events.map(a => {
+          return a._id;
+          
+        })
+        console.log('idList', idList)
         // let newId = Math.max(...idList) + 1
         const title = username;
         const eventProps = {  title, start, end }
@@ -82,7 +81,7 @@ class Scheduler extends Component {
         const { events } = this.state
     
         const nextEvents = events.map(existingEvent => {
-          return existingEvent.id == event.id
+          return existingEvent._id === event._id
             ? { ...existingEvent, start, end }
             : existingEvent
         })
@@ -98,6 +97,7 @@ class Scheduler extends Component {
 
     return (
       <Container>
+        {console.log('events', this.props.events)}
           <Header>
           <Logout 
             onClick={()=> this.props.signOut(()=> {
@@ -133,7 +133,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createEvent })(requireAuth(Scheduler));
+export default connect(mapStateToProps, { createEvent, signOut })(requireAuth(Scheduler));
 
       // handleSelect = ({ start, end }) => {
       //   let idList = this.state.events.map(a => a.id)

@@ -34,8 +34,6 @@ import { signUp } from '../actions';
 
 import jwt_decode from "jwt-decode";
 
-import FullCalendar from 'fullcalendar-reactwrapper';
-
 class SignUp extends Component {
     constructor(props) {
         super(props);

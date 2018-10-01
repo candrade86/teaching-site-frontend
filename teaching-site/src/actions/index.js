@@ -58,6 +58,19 @@ export const signOut = (callback) => {
     };
   };
 
+export const getEvents = () => dispatch => {
+    dispatch({ type: FETCHING_EVENTS })
+
+    axios
+        .get ("http://localhost:5000/api/event")
+        .then(response => {
+            dispatch({ type: FETCHED_EVENTS, payload: response.data })
+        })
+        .catch(err => {
+            dispatch({ type: ERROR, errorMessage: 'Error fetching events', err })
+        })
+}
+
 export const createEvent = eventProps => dispatch =>  {
     dispatch({ type: CREATING_EVENT }); 
   

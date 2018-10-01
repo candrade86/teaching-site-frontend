@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import jwt_decode from "jwt-decode";
 
 export default ChildComponent => {
   class ComposedComponent extends Component {
