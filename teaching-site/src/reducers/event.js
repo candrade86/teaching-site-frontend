@@ -3,13 +3,16 @@ import {
     FETCHING_EVENTS, 
     FETCHED_EVENTS, 
     CREATING_EVENT,
-    CREATED_EVENT 
+    CREATED_EVENT, 
+    DELETING_EVENT,
+    DELETED_EVENT
 } from "../actions/types";
 
 const INITIAL_STATE = {
     events: [],
     fetchingEvents: false,
     creatingEvent: false,
+    deletingEvent: false,
     errorMessage: "",
  
 };
@@ -24,6 +27,10 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, creatingEvent: true };
     case CREATED_EVENT:
         return { ...state, events: [ ...state.events, action.payload ], creatingEvent: false };
+    case DELETING_EVENT:
+        return { ...state, deletingEvent: true };
+    case DELETED_EVENT:
+        return { ...state, events: state.events.filter(e => e._id !== action.payload._id) };
     case ERROR:
         return { ...state, errorMessage: action.errorMessage };
     default:
