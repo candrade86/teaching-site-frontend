@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signOut, createEvent } from '../actions';
+import { signOut, fetchEvents, createEvent } from '../actions';
 import requireAuth from '../hoc/requireAuth';
 
 import Calendar from 'react-big-calendar';
@@ -21,31 +21,32 @@ import jwt_decode from 'jwt-decode';
 const localizer = Calendar.momentLocalizer(moment)
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
-const token = localStorage.getItem("token");
-const decoded = jwt_decode(token);
-let  username = decoded.username
+
 
 class Scheduler extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          events: []
+          events: this.props.events
         }
     
         this.moveEvent = this.moveEvent.bind(this)
       }
     
       componentDidMount() {
-        this.setState({events: this.props.events })
+        // this.props.fetchEvents()
       }
 
       handleSelect = ({ start, end }) => {
+        const token = localStorage.getItem("token");
+  const decoded = jwt_decode(token);
+let  username = decoded.username
         let idList = this.state.events.map(a => {
           return a._id;
           
         })
         console.log('idList', idList)
-        // let newId = Math.max(...idList) + 1
+        let newId = Math.max(...idList) + 1
         const title = username;
         const eventProps = {  title, start, end }
         if (title) {
@@ -94,10 +95,12 @@ class Scheduler extends Component {
       }
 
   render() {
-
+    const token = localStorage.getItem("token");
+  const decoded = jwt_decode(token);
+let  username = decoded.username
     return (
       <Container>
-        {console.log('events', this.props.events)}
+        {console.log('events', this.state.events)}
           <Header>
           <Logout 
             onClick={()=> this.props.signOut(()=> {
@@ -133,7 +136,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createEvent, signOut })(requireAuth(Scheduler));
+export default connect(mapStateToProps, { createEvent, fetchEvents, signOut })(Scheduler);
 
       // handleSelect = ({ start, end }) => {
       //   let idList = this.state.events.map(a => a.id)

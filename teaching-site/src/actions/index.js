@@ -58,7 +58,7 @@ export const signOut = (callback) => {
     };
   };
 
-export const getEvents = () => dispatch => {
+export const fetchEvents = () => dispatch => {
     dispatch({ type: FETCHING_EVENTS })
 
     axios
