@@ -73,7 +73,7 @@ export const fetchEvents = () => dispatch => {
 
 export const createEvent = eventProps => dispatch =>  {
     dispatch({ type: CREATING_EVENT }); 
-  
+    
     axios
         .post ("http://localhost:5000/api/event/create-event",
         eventProps

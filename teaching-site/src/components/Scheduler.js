@@ -18,10 +18,12 @@ import {
 
 import jwt_decode from 'jwt-decode';
 
-const localizer = Calendar.momentLocalizer(moment)
+const localizer = Calendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
-
+const token = localStorage.getItem("token");
+const decoded = jwt_decode(token);
+let  username = decoded.username
 
 class Scheduler extends Component {
     constructor(props) {
@@ -34,24 +36,32 @@ class Scheduler extends Component {
       }
     
       componentDidMount() {
-        // this.props.fetchEvents()
+        this.props.fetchEvents()
+      }
+
+      componentWillReceiveProps(nextProps){
+        
+        if(nextProps.events !== this.props.events){
+          let newEvents = nextProps.events.map((e)=> {
+            return {
+             title: e.title,  
+             end: new Date(e.end),
+             start: new Date(e.start)
+            }
+          })
+          this.setState({events: newEvents})
+        }
       }
 
       handleSelect = ({ start, end }) => {
-        const token = localStorage.getItem("token");
-  const decoded = jwt_decode(token);
-let  username = decoded.username
-        let idList = this.state.events.map(a => {
-          return a._id;
-          
-        })
-        console.log('idList', idList)
-        let newId = Math.max(...idList) + 1
         const title = username;
-        const eventProps = {  title, start, end }
-        if (title) {
-          this.props.createEvent(eventProps)
+        
+        let eventProps = {
+          title, 
+          start,
+          end
         }
+        this.props.createEvent(eventProps)       
       }
 
       moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
@@ -82,7 +92,7 @@ let  username = decoded.username
         const { events } = this.state
     
         const nextEvents = events.map(existingEvent => {
-          return existingEvent._id === event._id
+          return existingEvent._id == event._id
             ? { ...existingEvent, start, end }
             : existingEvent
         })
@@ -95,12 +105,12 @@ let  username = decoded.username
       }
 
   render() {
-    const token = localStorage.getItem("token");
-  const decoded = jwt_decode(token);
-let  username = decoded.username
+
     return (
       <Container>
-        {console.log('events', this.state.events)}
+        {console.log('compon', this.props.events)}
+        {console.log('compon state', this.state.events)}
+
           <Header>
           <Logout 
             onClick={()=> this.props.signOut(()=> {
@@ -136,7 +146,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createEvent, fetchEvents, signOut })(Scheduler);
+export default connect(mapStateToProps, { fetchEvents, createEvent })(requireAuth(Scheduler));
 
       // handleSelect = ({ start, end }) => {
       //   let idList = this.state.events.map(a => a.id)
@@ -187,3 +197,12 @@ export default connect(mapStateToProps, { createEvent, fetchEvents, signOut })(S
       //     events: this.state.events.concat([hour]),
       //   })
       // }
+
+      //   [
+      //     {
+      //     id: 0,
+      //     title: 'Party on Mars',
+      //     start: new Date(2018, 11, 11),
+      //     end: new Date(2018, 11, 11)
+      //     }
+      // ]
