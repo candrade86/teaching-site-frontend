@@ -8,6 +8,8 @@ import {
     FETCHED_EVENTS,
     CREATING_EVENT,
     CREATED_EVENT,
+    DELETING_EVENT,
+    DELETED_EVENT,
     ERROR
 } from './types';
 
@@ -86,3 +88,15 @@ export const createEvent = eventProps => dispatch =>  {
         });
 }
 
+export const deleteEvent = id => dispatch => {
+    dispatch({ type: DELETING_EVENT }); 
+    
+    axios
+        .delete (`http://localhost:5000/api/event/delete-event/${id}`)
+        .then(response => {
+            dispatch({ type: DELETED_EVENT, payload: response.data })
+        })
+        .catch(err => {
+            dispatch({ type: ERROR, errorMessage: 'Error deleting event.', err})
+        });
+}

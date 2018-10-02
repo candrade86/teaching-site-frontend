@@ -108,9 +108,6 @@ class Scheduler extends Component {
 
     return (
       <Container>
-        {console.log('compon', this.props.events)}
-        {console.log('compon state', this.state.events)}
-
           <Header>
           <Logout 
             onClick={()=> this.props.signOut(()=> {
@@ -147,62 +144,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchEvents, createEvent })(requireAuth(Scheduler));
-
-      // handleSelect = ({ start, end }) => {
-      //   let idList = this.state.events.map(a => a.id)
-      //   let newId = Math.max(...idList) + 1
-      //   const title = username;
-      //   if (title)
-      //     this.setState({
-      //       events: [
-      //         ...this.state.events,
-      //         {
-      //           id: newId,
-      //           title,
-      //           start,
-      //           end
-      //         },
-      //       ],
-      //     })
-      // }
-
-
-      // handleSelect = ({ start, end }) => {
-      //   const title = username;
-      //   if (title)
-      //     this.setState({
-      //       events: [
-      //         ...this.state.events,
-      //         {
-      //           id,
-      //           start,
-      //           end,
-      //           title,
-      //         },
-      //       ],
-      //     })
-      // }
-
-      //    newEvent(event) {
-      //   let idList = this.state.events.map(a => a.id)
-      //   let newId = Math.max(...idList) + 1
-      //   let hour = {
-      //     id: newId,
-      //     title: 'New Event',
-      //     allDay: event.slots.length == 1,
-      //     start: event.start,
-      //     end: event.end,
-      //   }
-      //   this.setState({
-      //     events: this.state.events.concat([hour]),
-      //   })
-      // }
-
-      //   [
-      //     {
-      //     id: 0,
-      //     title: 'Party on Mars',
-      //     start: new Date(2018, 11, 11),
-      //     end: new Date(2018, 11, 11)
-      //     }
-      // ]
