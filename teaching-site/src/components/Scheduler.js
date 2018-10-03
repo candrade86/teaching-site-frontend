@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signOut, fetchEvents, createEvent } from '../actions';
+import { signOut, fetchEvents, createEvent, deleteEvent } from '../actions';
 import requireAuth from '../hoc/requireAuth';
 
 import Calendar from 'react-big-calendar';
@@ -32,7 +32,8 @@ class Scheduler extends Component {
           events: this.props.events
         }
     
-        this.moveEvent = this.moveEvent.bind(this)
+        this.moveEvent = this.moveEvent.bind(this);
+        this.removeEvent = this.removeEvent.bind(this);
       }
     
       componentDidMount() {
@@ -44,6 +45,7 @@ class Scheduler extends Component {
         if(nextProps.events !== this.props.events){
           let newEvents = nextProps.events.map((e)=> {
             return {
+             _id: e._id, 
              title: e.title,  
              end: new Date(e.end),
              start: new Date(e.start)
@@ -63,6 +65,20 @@ class Scheduler extends Component {
         }
         this.props.createEvent(eventProps)       
       }
+
+      removeEvent(event) {
+        const { events } = this.state;
+        let idArr = events.map((e)=> {
+          if (e.start === event.start) {
+            return e._id;
+          }
+        });
+          let id = idArr.filter(i => i !== undefined)
+
+          if (id){
+            this.props.deleteEvent(id);
+          }
+      };
 
       moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
         const { events } = this.state
@@ -126,7 +142,8 @@ class Scheduler extends Component {
             resizable
             onEventResize={this.resizeEvent}
             onSelectSlot={this.handleSelect}
-            onSelectEvent={event => alert(event.title)}
+            onDoubleClickEvent={event => this.removeEvent(event)}
+            // onSelectEvent={event => alert(event.title)}
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
             style={{ fontSize: '2rem', height: '90vh', width: '100%', background: 'white' }}
@@ -143,4 +160,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchEvents, createEvent })(requireAuth(Scheduler));
+export default connect(mapStateToProps, { fetchEvents, createEvent, deleteEvent })(requireAuth(Scheduler));
