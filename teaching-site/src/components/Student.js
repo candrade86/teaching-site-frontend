@@ -14,9 +14,6 @@ import {
 } from '../styled-components/Student';
 
 class Student extends Component {
-  componentDidMount() {
-    
-  }
   render() {
     const token = localStorage.getItem("token");
     const decoded = jwt_decode(token);

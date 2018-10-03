@@ -8,6 +8,9 @@ export const FETCHED_EVENTS = 'got_events';
 export const CREATING_EVENT = 'creating_event';
 export const CREATED_EVENT = 'created_event';
 
+export const UPDATING_EVENT = 'updating_event';
+export const UPDATED_EVENT = 'updated_event';
+
 export const DELETING_EVENT = 'deleting_event';
 export const DELETED_EVENT = 'deleted_event';
 

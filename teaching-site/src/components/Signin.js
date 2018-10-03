@@ -8,8 +8,6 @@ import Spinner from '../components/UI/Spinner';
 
 import jwt_decode from "jwt-decode";
 
-
-
 import { 
     Container,
     SigninWrap,
@@ -51,8 +49,7 @@ onSubmit(event) {
     this.props.signIn(formProps, () => {
         const token = localStorage.getItem("token");
         const decoded = jwt_decode(token);
-        console.log('token', decoded)
-        let  username = decoded.username
+        let  username = decoded.username;
         this.props.history.push(`/student/${username}`);
     });
         
@@ -93,11 +90,8 @@ onSubmit(event) {
                             onChange={this.handleInput}
                             value={this.state.password} 
                         />
-
                         <OrWrap><HRWrap><HR /></HRWrap></OrWrap>
-
                         <Button>Sign in</Button>
-                    {console.log(this.props.signingIn)}
                     </Form>
                 </SigninInner> 
             </SigninWrap>

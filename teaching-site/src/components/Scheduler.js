@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signOut, fetchEvents, createEvent, deleteEvent } from '../actions';
+import { signOut, createEvent, deleteEvent } from '../actions';
 import requireAuth from '../hoc/requireAuth';
 
 import Calendar from 'react-big-calendar';
@@ -21,10 +21,6 @@ import jwt_decode from 'jwt-decode';
 const localizer = Calendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
-const token = localStorage.getItem("token");
-const decoded = jwt_decode(token);
-let  username = decoded.username
-
 class Scheduler extends Component {
     constructor(props) {
         super(props)
@@ -37,25 +33,46 @@ class Scheduler extends Component {
       }
     
       componentDidMount() {
-        this.props.fetchEvents()
+        
+
+        fetch("http://localhost:5000/api/event")
+          .then(response => response.json())
+          .then(data => {
+            let newEvents = data.map((e)=> {
+              return {
+                _id: e._id, 
+                title: e.title,  
+                end: new Date(e.end),
+                start: new Date(e.start)
+              }
+          })
+          if(this._ismounted = true){
+            this.setState({ events: newEvents });
+          }
+        })
       }
 
-      componentWillReceiveProps(nextProps){
-        
-        if(nextProps.events !== this.props.events){
-          let newEvents = nextProps.events.map((e)=> {
-            return {
-             _id: e._id, 
-             title: e.title,  
-             end: new Date(e.end),
-             start: new Date(e.start)
-            }
+      componentDidUpdate() {
+        fetch("http://localhost:5000/api/event")
+          .then(response => response.json())
+          .then(data => {
+            let newEvents = data.map((e)=> {
+              return {
+                _id: e._id, 
+                title: e.title,  
+                end: new Date(e.end),
+                start: new Date(e.start)
+              }
           })
-          this.setState({events: newEvents})
-        }
+            this.setState({ events: newEvents });
+        })
       }
 
       handleSelect = ({ start, end }) => {
+        const token = localStorage.getItem("token");
+        const decoded = jwt_decode(token);
+        let  username = decoded.username;
+        
         const title = username;
         
         let eventProps = {
@@ -63,10 +80,16 @@ class Scheduler extends Component {
           start,
           end
         }
-        this.props.createEvent(eventProps)       
-      }
+          this.props.createEvent(eventProps)
+        }       
+    
 
       removeEvent(event) {
+        const token = localStorage.getItem("token");
+        const decoded = jwt_decode(token);
+        let username = decoded.username;
+
+        if(event.title === username){
         const { events } = this.state;
         let idArr = events.map((e)=> {
           if (e.start === event.start) {
@@ -78,21 +101,15 @@ class Scheduler extends Component {
           if (id){
             this.props.deleteEvent(id);
           }
+        };
       };
 
-      moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
+      moveEvent({ event, start, end }) {
         const { events } = this.state
     
         const idx = events.indexOf(event)
-        let allDay = event.allDay
     
-        if (!event.allDay && droppedOnAllDaySlot) {
-          allDay = true
-        } else if (event.allDay && !droppedOnAllDaySlot) {
-          allDay = false
-        }
-    
-        const updatedEvent = { ...event, start, end, allDay }
+        const updatedEvent = { ...event, start, end }
     
         const nextEvents = [...events]
         nextEvents.splice(idx, 1, updatedEvent)
@@ -121,6 +138,9 @@ class Scheduler extends Component {
       }
 
   render() {
+    const token = localStorage.getItem("token");
+    const decoded = jwt_decode(token);
+    let  username = decoded.username;
 
     return (
       <Container>
@@ -141,7 +161,7 @@ class Scheduler extends Component {
             onEventDrop={this.moveEvent}
             resizable
             onEventResize={this.resizeEvent}
-            onSelectSlot={this.handleSelect}
+            onSelectSlot={event => this.handleSelect(event)}
             onDoubleClickEvent={event => this.removeEvent(event)}
             // onSelectEvent={event => alert(event.title)}
             defaultView={Calendar.Views.WEEK}
@@ -160,4 +180,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchEvents, createEvent, deleteEvent })(requireAuth(Scheduler));
+export default connect(mapStateToProps, { createEvent, deleteEvent, signOut })(requireAuth(Scheduler));
