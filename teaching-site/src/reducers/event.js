@@ -5,7 +5,9 @@ import {
     CREATING_EVENT,
     CREATED_EVENT, 
     DELETING_EVENT,
-    DELETED_EVENT
+    DELETED_EVENT,
+    UPDATING_EVENT,
+    UPDATED_EVENT
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -13,6 +15,7 @@ const INITIAL_STATE = {
     fetchingEvents: false,
     creatingEvent: false,
     deletingEvent: false,
+    updatingEvent: false,
     errorMessage: "",
  
 };
@@ -31,6 +34,10 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, deletingEvent: true };
     case DELETED_EVENT:
         return { ...state, events: state.events.filter(e => e._id !== action.payload._id) };
+    case UPDATING_EVENT:
+        return { ...state, updatingEvent: true };
+    case UPDATED_EVENT:
+        return { ...state, updatingEvent: false };
     case ERROR:
         return { ...state, errorMessage: action.errorMessage };
     default:

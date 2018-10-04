@@ -96,10 +96,10 @@ export const updateEvent = (id, update) => dispatch => {
     axios
         .put('http://localhost:5000/api/event/update-event', {id, update})
         .then(response => {
-            dispatch({ type: UPDATED_EVENT, payload: response.data})
+            dispatch({ type: UPDATED_EVENT })
         })
         .catch(err => {
-            dispatch({ type: ERROR, errorMessage: "error updating game", err })
+            dispatch({ type: ERROR, errorMessage: "error updating event", err })
         })
 }
 

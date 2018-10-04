@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signOut, createEvent, deleteEvent } from '../actions';
+import { signOut, createEvent, deleteEvent, updateEvent } from '../actions';
 import requireAuth from '../hoc/requireAuth';
 
 import Calendar from 'react-big-calendar';
@@ -33,7 +33,7 @@ class Scheduler extends Component {
       }
     
       componentDidMount() {
-        
+
 
         fetch("http://localhost:5000/api/event")
           .then(response => response.json())
@@ -104,21 +104,12 @@ class Scheduler extends Component {
         };
       };
 
-      moveEvent({ event, start, end }) {
-        const { events } = this.state
-    
-        const idx = events.indexOf(event)
-    
+      moveEvent({ event, start, end }) {        
+        let id = event._id;
         const updatedEvent = { ...event, start, end }
-    
-        const nextEvents = [...events]
-        nextEvents.splice(idx, 1, updatedEvent)
-    
-        this.setState({
-          events: nextEvents,
-        })
-    
-        alert(`${event.title} was dropped onto ${updatedEvent.start}`)
+        this.props.updateEvent(id, {...event, start, end})
+
+        // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
       }
     
       resizeEvent = ({ event, start, end }) => {
@@ -180,4 +171,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createEvent, deleteEvent, signOut })(requireAuth(Scheduler));
+export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent, signOut })(requireAuth(Scheduler));
