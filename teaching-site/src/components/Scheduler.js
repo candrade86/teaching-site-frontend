@@ -74,14 +74,17 @@ class Scheduler extends Component {
         let  username = decoded.username;
         
         const title = username;
+        const diff = Math.abs((start - end) / 60000);
         
+        if (diff <= 60){
         let eventProps = {
           title, 
           start,
           end
         }
           this.props.createEvent(eventProps)
-        }       
+        }
+      }       
     
 
       removeEvent(event) {
@@ -113,19 +116,11 @@ class Scheduler extends Component {
       }
     
       resizeEvent = ({ event, start, end }) => {
-        const { events } = this.state
+        let id = event._id;
+        const updatedEvent = { ...event, start, end }
+        this.props.updateEvent(id, { ...event, start, end })
     
-        const nextEvents = events.map(existingEvent => {
-          return existingEvent._id == event._id
-            ? { ...existingEvent, start, end }
-            : existingEvent
-        })
-    
-        this.setState({
-          events: nextEvents,
-        })
-    
-        alert(`${event.title} was resized to ${start}-${end}`)
+        // alert(`${event.title} was resized to ${start}-${end}`)
       }
 
   render() {
@@ -150,7 +145,7 @@ class Scheduler extends Component {
             localizer={localizer}
             events={this.state.events}
             onEventDrop={this.moveEvent}
-            resizable
+            // resizable
             onEventResize={this.resizeEvent}
             onSelectSlot={event => this.handleSelect(event)}
             onDoubleClickEvent={event => this.removeEvent(event)}
