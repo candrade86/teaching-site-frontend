@@ -52,7 +52,8 @@ class Scheduler extends Component {
         })
       }
 
-      componentDidUpdate() {
+      componentDidUpdate(prevProps, prevState) {
+        if(prevProps.events !== this.props.events){
         fetch("http://localhost:5000/api/event")
           .then(response => response.json())
           .then(data => {
@@ -65,7 +66,8 @@ class Scheduler extends Component {
               }
           })
             this.setState({ events: newEvents });
-        })
+          })
+        }
       }
 
       handleSelect = ({ start, end }) => {
@@ -75,7 +77,7 @@ class Scheduler extends Component {
         
         const title = username;
         const diff = Math.abs((start - end) / 60000);
-        
+
         if (diff <= 60){
           console.log('inside if', diff)
           if (diff === 30){
@@ -113,22 +115,33 @@ class Scheduler extends Component {
         };
       };
 
-      moveEvent({ event, start, end }) {        
-        let id = event._id;
-        const updatedEvent = { ...event, start, end }
-        this.props.updateEvent(id, {...event, start, end})
+      moveEvent({ event, start, end }) {
+        const token = localStorage.getItem("token");
+        const decoded = jwt_decode(token);
+        let  username = decoded.username;
 
+        if(event.title === username){
+          let id = event._id;
+          const updatedEvent = { ...event, start, end }
+          this.props.updateEvent(id, {...event, start, end})
         // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
+        }
       }
     
       resizeEvent = ({ event, start, end }) => {
-        let id = event._id;
-        const updatedEvent = { ...event, start, end }
-        const diff = Math.abs((start - end) / 60000);
+        const token = localStorage.getItem("token");
+        const decoded = jwt_decode(token);
+        let  username = decoded.username;
+
+        if(event.title === username){
+          let id = event._id;
+          const updatedEvent = { ...event, start, end }
+          const diff = Math.abs((start - end) / 60000);
         
         if (diff <= 60) {
           this.props.updateEvent(id, { ...event, start, end })
         }
+      } 
         // alert(`${event.title} was resized to ${start}-${end}`)
       }
 
@@ -155,7 +168,7 @@ class Scheduler extends Component {
             events={this.state.events}
             onEventDrop={this.moveEvent}
             // resizable
-            onEventResize={this.resizeEvent}
+            // onEventResize={this.resizeEvent}
             onSelectSlot={event => this.handleSelect(event)}
             onDoubleClickEvent={event => this.removeEvent(event)}
             // onSelectEvent={event => alert(event.title)}
