@@ -12,7 +12,8 @@ import {
     DELETED_EVENT,
     ERROR,
     UPDATING_EVENT,
-    UPDATED_EVENT
+    UPDATED_EVENT,
+    PAYING
 } from './types';
 
 import jwt_decode from "jwt-decode";
@@ -31,7 +32,7 @@ export const signUp = (formProps, callback) => dispatch => {
         })
         
         .catch(err => {
-            dispatch({ type: ERROR, errorMessage: 'Username already in use.', err})
+            dispatch({ type: ERROR, errorMessage: 'Username already in use.', err })
         });
   };
 
@@ -48,7 +49,7 @@ export const signIn = (formProps, callback) => dispatch => {
             callback();
         })
         .catch(err => {
-            dispatch({ type: ERROR, errorMessage: 'User not found.', err})
+            dispatch({ type: ERROR, errorMessage: 'User not found.', err })
         });
   
   };  
@@ -86,7 +87,7 @@ export const createEvent = eventProps => dispatch =>  {
             dispatch({ type: CREATED_EVENT, payload: response.data })
         })
         .catch(err => {
-            dispatch({ type: ERROR, errorMessage: 'Error creating event.', err})
+            dispatch({ type: ERROR, errorMessage: 'Error creating event.', err })
         });
 }
 
@@ -112,6 +113,19 @@ export const deleteEvent = id => dispatch => {
             dispatch({ type: DELETED_EVENT, payload: response.data })
         })
         .catch(err => {
-            dispatch({ type: ERROR, errorMessage: 'Error deleting event.', err})
+            dispatch({ type: ERROR, errorMessage: 'Error deleting event.', err })
         });
+}
+
+export const pay = () => dispatch => {
+    dispatch({ type: PAYING });
+
+    axios
+        .post('http://localhost:5000/api/paypal/pay')
+        .then(response => {
+            console.log('payload', response.data)
+        })
+        .catch(err => {
+            dispatch({ type: ERROR, errorMessage: 'Error making payment', err })
+        })
 }
