@@ -44,6 +44,7 @@ class PaypalButton extends Component {
   }
 
   render() {
+    const paypal = window.PAYPAL;
     const {
       total,
       currency,
