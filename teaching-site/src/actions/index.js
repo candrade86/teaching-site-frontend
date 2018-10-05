@@ -123,7 +123,7 @@ export const pay = () => dispatch => {
     axios
         .post('http://localhost:5000/api/paypal/pay')
         .then(response => {
-            console.log('payload', response.data)
+            console.log('payload', response)
         })
         .catch(err => {
             dispatch({ type: ERROR, errorMessage: 'Error making payment', err })
