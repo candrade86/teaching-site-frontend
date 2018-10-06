@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import requireAuth from '../hoc/requireAuth';
-import PayPal from './PaypalButton';
+
 import { signOut } from '../actions';
 import jwt_decode from 'jwt-decode';
 
@@ -14,10 +14,7 @@ import {
   Schedule
 } from '../styled-components/Student';
 
-const CLIENT = {
-  sandbox: process.env.REACT_APP_PAYPAL_CLIENT_ID_SANDBOX,
-  production: process.env.REACT_APP_PAYPAL_CLIENT_ID_PRODUCTION
-};
+
 
 
 class Student extends Component {
@@ -25,21 +22,6 @@ class Student extends Component {
     const token = localStorage.getItem("token");
     const decoded = jwt_decode(token);
     let  username = decoded.username;
-
-
-    //paypal
-    const ENV =  process.env.NODE_ENV === 'production'
-    ? 'production'
-    : 'sandbox';
-
-    const onSuccess = (payment) =>
-      console.log('Successful payment!', payment);
-
-    const onError = (error) =>
-      console.log('Erroneous payment OR failed to load script!', error);
-
-    const onCancel = (data) =>
-      console.log('Cancelled payment!', data);
 
     return (
       <Container>
@@ -61,16 +43,6 @@ class Student extends Component {
           </Schedule>
           
         </Middle>
-        <PayPal
-          client={CLIENT}
-          env={ENV}
-          commit={true}
-          currency={'USD'}
-          total={90}
-          onSuccess={onSuccess}
-          onError={onError}
-          onCancel={onCancel}
-        />
       </Container>
     )
   }
