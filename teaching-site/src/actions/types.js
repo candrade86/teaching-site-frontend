@@ -14,7 +14,4 @@ export const UPDATED_EVENT = 'updated_event';
 export const DELETING_EVENT = 'deleting_event';
 export const DELETED_EVENT = 'deleted_event';
 
-export const PAYING = 'paying';
-export const PAID = 'paid';
-
 export const ERROR = 'error';

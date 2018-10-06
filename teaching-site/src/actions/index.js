@@ -13,7 +13,6 @@ import {
     ERROR,
     UPDATING_EVENT,
     UPDATED_EVENT,
-    PAYING
 } from './types';
 
 import jwt_decode from "jwt-decode";
@@ -118,15 +117,3 @@ export const deleteEvent = id => dispatch => {
         });
 }
 
-export const pay = () => dispatch => {
-    dispatch({ type: PAYING });
-
-    axios
-        .post('/api/paypal/pay')
-        .then(response => {
-            console.log('payload', response)
-        })
-        .catch(err => {
-            dispatch({ type: ERROR, errorMessage: 'Error making payment', err })
-        })
-}

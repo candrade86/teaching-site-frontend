@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import requireAuth from '../hoc/requireAuth';
 import PayPal from './PaypalButton';
-import { signOut, pay } from '../actions';
+import { signOut } from '../actions';
 import jwt_decode from 'jwt-decode';
 
 import {  
@@ -59,7 +59,7 @@ class Student extends Component {
           > 
             Shedule a session 
           </Schedule>
-          <h1 onClick={()=> this.props.pay()} style={{ fontSize: '3rem', color: 'white' }}>PAY</h1>
+          
         </Middle>
         <PayPal
           client={CLIENT}
@@ -76,4 +76,4 @@ class Student extends Component {
   }
 }
 
-export default connect(null, { signOut, pay })(requireAuth(withRouter(Student)));
+export default connect(null, { signOut })(requireAuth(withRouter(Student)));
