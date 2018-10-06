@@ -21,6 +21,10 @@ import jwt_decode from 'jwt-decode';
 const localizer = Calendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
+let API_URL = process.env.NODE_ENV === 'production'
+?  process.env.REACT_APP_API_URL_PROD
+: process.env.REACT_APP_API_URL_DEV;
+
 class Scheduler extends Component {
     constructor(props) {
         super(props)
@@ -33,9 +37,7 @@ class Scheduler extends Component {
       }
     
       componentDidMount() {
-
-
-        fetch("http://localhost:5000/api/event")
+        fetch(`${API_URL}/api/event`)
           .then(response => response.json())
           .then(data => {
             let newEvents = data.map((e)=> {
@@ -52,24 +54,7 @@ class Scheduler extends Component {
         })
       }
 
-      componentDidUpdate(prevProps, prevState) {
-        if(prevProps.events !== this.props.events){
-        fetch("http://localhost:5000/api/event")
-          .then(response => response.json())
-          .then(data => {
-            let newEvents = data.map((e)=> {
-              return {
-                _id: e._id, 
-                title: e.title,  
-                end: new Date(e.end),
-                start: new Date(e.start)
-              }
-          })
-            this.setState({ events: newEvents });
-          })
-        }
-      }
-
+ 
       handleSelect = ({ start, end }) => {
         const token = localStorage.getItem("token");
         const decoded = jwt_decode(token);
@@ -123,8 +108,22 @@ class Scheduler extends Component {
         if(event.title === username){
           let id = event._id;
           const updatedEvent = { ...event, start, end }
-          this.props.updateEvent(id, {...event, start, end})
-        // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
+          this.props.updateEvent(id, {...event, start, end}, ()=> {
+            fetch(`${API_URL}/api/event`)
+            .then(response => response.json())
+            .then(data => {
+              let newEvents = data.map((e)=> {
+                return {
+                  _id: e._id, 
+                  title: e.title,  
+                  end: new Date(e.end),
+                  start: new Date(e.start)
+                }
+            })
+              this.setState({ events: newEvents });
+            })
+          })
+        alert(`${event.title} was dropped onto ${updatedEvent.start}`)
         }
       }
     
@@ -189,3 +188,21 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent, signOut })(requireAuth(Scheduler));
+
+     // componentDidUpdate(prevProps, prevState) {
+      //   if(prevProps.events !== this.props.events){
+      //   fetch("http://localhost:5000/api/event")
+      //     .then(response => response.json())
+      //     .then(data => {
+      //       let newEvents = data.map((e)=> {
+      //         return {
+      //           _id: e._id, 
+      //           title: e.title,  
+      //           end: new Date(e.end),
+      //           start: new Date(e.start)
+      //         }
+      //     })
+      //       this.setState({ events: newEvents });
+      //     })
+      //   }
+      // }

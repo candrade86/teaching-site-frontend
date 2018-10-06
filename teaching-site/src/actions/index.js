@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios-base';
 
 import {
     SIGNING_UP,
@@ -22,7 +22,7 @@ export const signUp = (formProps, callback) => dispatch => {
     dispatch({ type: SIGNING_UP }); 
   
     axios
-        .post ('http://localhost:5000/api/authentication/signup', 
+        .post ('/api/authentication/signup', 
         formProps
         )
         .then(response => {
@@ -40,7 +40,7 @@ export const signIn = (formProps, callback) => dispatch => {
     dispatch({ type: SIGNING_IN }); 
   
     axios
-        .post ("http://localhost:5000/api/authentication/signin",
+        .post ("/api/authentication/signin",
         formProps
         )
         .then(response => {
@@ -67,7 +67,7 @@ export const fetchEvents = () => dispatch => {
     dispatch({ type: FETCHING_EVENTS })
 
     axios
-        .get ("http://localhost:5000/api/event")
+        .get ("/api/event")
         .then(response => {
             dispatch({ type: FETCHED_EVENTS, payload: response.data })
         })
@@ -80,7 +80,7 @@ export const createEvent = eventProps => dispatch =>  {
     dispatch({ type: CREATING_EVENT }); 
     
     axios
-        .post ("http://localhost:5000/api/event/create-event",
+        .post ("/api/event/create-event",
         eventProps
         )
         .then(response => {
@@ -91,13 +91,14 @@ export const createEvent = eventProps => dispatch =>  {
         });
 }
 
-export const updateEvent = (id, update) => dispatch => {
+export const updateEvent = (id, update, callback) => dispatch => {
     dispatch({ type: UPDATING_EVENT });
 
     axios
-        .put('http://localhost:5000/api/event/update-event', {id, update})
+        .put('/api/event/update-event', {id, update})
         .then(response => {
             dispatch({ type: UPDATED_EVENT })
+            callback();
         })
         .catch(err => {
             dispatch({ type: ERROR, errorMessage: "error updating event", err })
@@ -108,7 +109,7 @@ export const deleteEvent = id => dispatch => {
     dispatch({ type: DELETING_EVENT }); 
     
     axios
-        .delete (`http://localhost:5000/api/event/delete-event/${id}`)
+        .delete (`/api/event/delete-event/${id}`)
         .then(response => {
             dispatch({ type: DELETED_EVENT, payload: response.data })
         })
@@ -121,7 +122,7 @@ export const pay = () => dispatch => {
     dispatch({ type: PAYING });
 
     axios
-        .post('http://localhost:5000/api/paypal/pay')
+        .post('/api/paypal/pay')
         .then(response => {
             console.log('payload', response)
         })
