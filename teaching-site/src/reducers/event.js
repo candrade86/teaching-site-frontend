@@ -33,7 +33,7 @@ export default function(state = INITIAL_STATE, action) {
     case DELETING_EVENT:
         return { ...state, deletingEvent: true };
     case DELETED_EVENT:
-        return { ...state, events: state.events.filter(e => e._id !== action.payload._id) };
+        return { ...state, events: state.events.filter(e => e._id !== action.payload._id), deletingEvent: false };
     case UPDATING_EVENT:
         return { ...state, updatingEvent: true };
     case UPDATED_EVENT:

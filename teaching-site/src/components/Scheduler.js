@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signOut, createEvent, deleteEvent, updateEvent } from '../actions';
 import requireAuth from '../hoc/requireAuth';
+import Spinner from './UI/Spinner';
 
 import Calendar from 'react-big-calendar';
 import moment from 'moment-timezone';
@@ -74,22 +75,22 @@ class Scheduler extends Component {
               start,
               end
           }
-          this.props.createEvent(eventProps, ()=> {
-            fetch(`${API_URL}/api/event`)
-            .then(response => response.json())
-            .then(data => {
-              let newEvents = data.map((e)=> {
-                return {
-                  _id: e._id, 
-                  title: e.title,  
-                  end: new Date(e.end),
-                  start: new Date(e.start)
-                }
-            })
-              this.setState({ events: newEvents });
-            })
+            this.props.createEvent(eventProps, ()=> {
+              fetch(`${API_URL}/api/event`)
+              .then(response => response.json())
+              .then(data => {
+                let newEvents = data.map((e)=> {
+                  return {
+                    _id: e._id, 
+                    title: e.title,  
+                    end: new Date(e.end),
+                    start: new Date(e.start)
+                  }
+              })
+                this.setState({ events: newEvents });
+              })
 
-          })
+            })
           }
         }
       }       
@@ -182,8 +183,15 @@ class Scheduler extends Component {
     const decoded = jwt_decode(token);
     let  username = decoded.username;
 
+    let spinner;
+
+    if (this.props.fetchingEvent === true || this.props.creatingEvent === true || this.props.deletingEvent === true || this.props.updatingEvent === true ) {
+        spinner = <Spinner />;
+      }
+
     return (
       <Container>
+        {spinner}
           <Header>
           <Logout 
             onClick={()=> this.props.signOut(()=> {
@@ -216,7 +224,11 @@ class Scheduler extends Component {
 
 function mapStateToProps(state) {
   return {
-      events: state.event.events
+      events: state.event.events,
+      deletingEvent: state.event.deletingEvent,
+      fetchingEvent: state.event.fetchingEvent,
+      creatingEvent: state.event.creatingEvent,
+      updatingEvent: state.event.updatingEvent
   };
 }
 
