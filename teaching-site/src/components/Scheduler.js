@@ -110,7 +110,21 @@ class Scheduler extends Component {
           let id = idArr.filter(i => i !== undefined)
 
           if (id){
-            this.props.deleteEvent(id);
+            this.props.deleteEvent(id, () => {
+              fetch(`${API_URL}/api/event`)
+              .then(response => response.json())
+              .then(data => {
+                let newEvents = data.map((e)=> {
+                  return {
+                    _id: e._id, 
+                    title: e.title,  
+                    end: new Date(e.end),
+                    start: new Date(e.start)
+                  }
+                })
+                this.setState({ events: newEvents });
+              })
+            });
           }
         };
       };
