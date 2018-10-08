@@ -74,7 +74,22 @@ class Scheduler extends Component {
               start,
               end
           }
-          this.props.createEvent(eventProps)
+          this.props.createEvent(eventProps, ()=> {
+            fetch(`${API_URL}/api/event`)
+            .then(response => response.json())
+            .then(data => {
+              let newEvents = data.map((e)=> {
+                return {
+                  _id: e._id, 
+                  title: e.title,  
+                  end: new Date(e.end),
+                  start: new Date(e.start)
+                }
+            })
+              this.setState({ events: newEvents });
+            })
+
+          })
           }
         }
       }       
@@ -106,8 +121,13 @@ class Scheduler extends Component {
         let  username = decoded.username;
 
         if(event.title === username){
+          const { events } = this.state;
+          const idx = events.indexOf(event);
           let id = event._id;
           const updatedEvent = { ...event, start, end }
+          const nextEvents = [...events]
+          nextEvents.splice(idx, 1, updatedEvent)
+          this.setState({ events: nextEvents });
           this.props.updateEvent(id, {...event, start, end}, ()=> {
             fetch(`${API_URL}/api/event`)
             .then(response => response.json())
@@ -119,11 +139,10 @@ class Scheduler extends Component {
                   end: new Date(e.end),
                   start: new Date(e.start)
                 }
-            })
-              this.setState({ events: newEvents });
+              })
             })
           })
-        alert(`${event.title} was dropped onto ${updatedEvent.start}`)
+        // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
         }
       }
     

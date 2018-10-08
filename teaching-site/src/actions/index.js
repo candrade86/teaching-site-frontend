@@ -75,7 +75,7 @@ export const fetchEvents = () => dispatch => {
         })
 }
 
-export const createEvent = eventProps => dispatch =>  {
+export const createEvent = (eventProps, callback) => dispatch =>  {
     dispatch({ type: CREATING_EVENT }); 
     
     axios
@@ -84,6 +84,7 @@ export const createEvent = eventProps => dispatch =>  {
         )
         .then(response => {
             dispatch({ type: CREATED_EVENT, payload: response.data })
+            callback();
         })
         .catch(err => {
             dispatch({ type: ERROR, errorMessage: 'Error creating event.', err })

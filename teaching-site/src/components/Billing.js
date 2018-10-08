@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PayPal from './PaypalButton';
 import { Container } from '../styled-components/Billing';
+import Checkout from '../Checkout';
 
 const CLIENT = {
     sandbox: process.env.REACT_APP_PAYPAL_CLIENT_ID_SANDBOX,
@@ -35,6 +36,11 @@ class Billing extends Component {
           onSuccess={onSuccess}
           onError={onError}
           onCancel={onCancel}
+        />
+        <Checkout
+            name={'Conversational English'}
+            description={'kamehameha!!!'}
+            amount={1}
         />
       </Container>
     )
