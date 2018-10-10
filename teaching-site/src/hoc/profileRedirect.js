@@ -14,10 +14,17 @@ export default ChildComponent => {
 
     shouldNavigateAway() {
       let token = localStorage.getItem("token");
+      let fbToken = localStorage.getItem("fbToken");
       
       if (token) {  
         const decoded = jwt_decode(token);
         let username = decoded.username;
+
+        this.props.history.push(`/student/${username}`);
+      }
+
+      if (fbToken) {  
+        let username = fbToken.username;
 
         this.props.history.push(`/student/${username}`);
       }
