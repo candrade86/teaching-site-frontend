@@ -5,17 +5,13 @@ import { signUp } from '../actions';
 import FacebookLogin from 'react-facebook-login';
 
 import '../css/Facebook.css'
-
+let token;
 class Facebook extends Component {
-
+    
     responseFacebook = (response, callback) => {
-        console.log(response);
-        this.setState({
-            isLoggedIn: true,
-            userID: response.userID,
-            email: response.name,
-            picture: response.picture.data.url
-        });
+      localStorage.setItem('fbToken', JSON.stringify({token:response.accessToken, username: response.name}))
+       let fbToken = JSON.parse(localStorage.getItem('fbToken'))
+       this.props.history.push(`/student/${fbToken.username}`)
     }
 
     componentClicked = () => console.log('clicked');
@@ -26,7 +22,7 @@ class Facebook extends Component {
       <div style={{width: '85%'}}>
          <FacebookLogin
             appId='404977906697751'
-            autoLoad={true}
+            autoLoad={false}
             fields='name,email,picture'
             onClick={this.componentClicked}
             callback={this.responseFacebook}

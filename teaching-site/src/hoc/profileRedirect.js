@@ -13,8 +13,8 @@ export default ChildComponent => {
     }
 
     shouldNavigateAway() {
-      const token = localStorage.getItem("token");
-
+      let token = localStorage.getItem("token");
+      
       if (token) {  
         const decoded = jwt_decode(token);
         let username = decoded.username;

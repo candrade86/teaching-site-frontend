@@ -15,13 +15,26 @@ import {
 } from '../styled-components/Student';
 
 
-
-
 class Student extends Component {
   render() {
-    const token = localStorage.getItem("token");
-    const decoded = jwt_decode(token);
-    let  username = decoded.username;
+    let username;
+    // let token;
+      if (localStorage.getItem('token')){
+        console.log('inside first statement')
+        token = localStorage.getItem('token')
+        
+        let token = localStorage.getItem("token");   
+        const decoded = jwt_decode(token);
+        username = decoded.username;
+      }
+      
+
+      if(localStorage.getItem('fbToken')){
+        let token = JSON.parse(localStorage.getItem('fbToken'))
+        username = token.username;
+       console.log('inside second statement')
+      
+      }
 
     return (
       <Container>

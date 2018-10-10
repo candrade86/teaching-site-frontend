@@ -160,23 +160,6 @@ class Scheduler extends Component {
         // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
         }
       }
-    
-      resizeEvent = ({ event, start, end }) => {
-        const token = localStorage.getItem("token");
-        const decoded = jwt_decode(token);
-        let  username = decoded.username;
-
-        if(event.title === username){
-          let id = event._id;
-          const updatedEvent = { ...event, start, end }
-          const diff = Math.abs((start - end) / 60000);
-        
-        if (diff <= 60) {
-          this.props.updateEvent(id, { ...event, start, end })
-        }
-      } 
-        // alert(`${event.title} was resized to ${start}-${end}`)
-      }
 
   render() {
     const token = localStorage.getItem("token");
@@ -185,7 +168,7 @@ class Scheduler extends Component {
 
     let spinner;
 
-    if (this.props.fetchingEvent === true || this.props.creatingEvent === true || this.props.deletingEvent === true || this.props.updatingEvent === true ) {
+    if (this.props.fetchingEvents === true || this.props.creatingEvent === true || this.props.deletingEvent === true || this.props.updatingEvent === true ) {
         spinner = <Spinner />;
       }
 
@@ -207,11 +190,8 @@ class Scheduler extends Component {
             localizer={localizer}
             events={this.state.events}
             onEventDrop={this.moveEvent}
-            // resizable
-            // onEventResize={this.resizeEvent}
             onSelectSlot={event => this.handleSelect(event)}
             onDoubleClickEvent={event => this.removeEvent(event)}
-            // onSelectEvent={event => alert(event.title)}
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
             style={{ fontSize: '2rem', height: '90vh', width: '100%', background: 'white' }}
@@ -226,28 +206,10 @@ function mapStateToProps(state) {
   return {
       events: state.event.events,
       deletingEvent: state.event.deletingEvent,
-      fetchingEvent: state.event.fetchingEvent,
+      fetchingEvents: state.event.fetchingEvents,
       creatingEvent: state.event.creatingEvent,
       updatingEvent: state.event.updatingEvent
   };
 }
 
 export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent, signOut })(requireAuth(Scheduler));
-
-     // componentDidUpdate(prevProps, prevState) {
-      //   if(prevProps.events !== this.props.events){
-      //   fetch("http://localhost:5000/api/event")
-      //     .then(response => response.json())
-      //     .then(data => {
-      //       let newEvents = data.map((e)=> {
-      //         return {
-      //           _id: e._id, 
-      //           title: e.title,  
-      //           end: new Date(e.end),
-      //           start: new Date(e.start)
-      //         }
-      //     })
-      //       this.setState({ events: newEvents });
-      //     })
-      //   }
-      // }
