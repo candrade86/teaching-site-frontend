@@ -9,7 +9,7 @@ let token;
 class Facebook extends Component {
     
     responseFacebook = (response, callback) => {
-      localStorage.setItem('fbToken', JSON.stringify({token:response.accessToken, username: response.name}))
+      localStorage.setItem('fbToken', JSON.stringify({ token:response.accessToken, username: response.name, id: response.userID }))
       let fbToken = JSON.parse(localStorage.getItem('fbToken'))
       this.props.history.push(`/student/${fbToken.username}`)
     }

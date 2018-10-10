@@ -68,7 +68,7 @@ class Scheduler extends Component {
 
         if (fbToken) {
           let fbToken = JSON.parse(localStorage.getItem('fbToken'))
-          username = fbToken.username;
+          username = `${fbToken.username} #${fbToken.id}`;
         }
 
         const title = username;
@@ -118,7 +118,7 @@ class Scheduler extends Component {
 
         if (fbToken) {
           let fbToken = JSON.parse(localStorage.getItem('fbToken'))
-          username = fbToken.username;
+          username = `${fbToken.username} #${fbToken.id}`;
         }
 
         if(event.title === username){
@@ -162,7 +162,7 @@ class Scheduler extends Component {
 
         if (fbToken) {
           let fbToken = JSON.parse(localStorage.getItem('fbToken'))
-          username = fbToken.username;
+          username = `${fbToken.username} #${fbToken.id}`;
         }
 
         if(event.title === username){
