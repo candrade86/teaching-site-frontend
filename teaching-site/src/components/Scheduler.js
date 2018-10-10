@@ -75,11 +75,8 @@ class Scheduler extends Component {
         const diff = Math.abs((start - end) / 60000);
 
         if (diff <= 60){
-          console.log('inside if', diff)
           if (diff === 30){
-              console.log(end)
               end = new Date(end.getTime() + 1800000)
-              console.log(end)
             let eventProps = {
               title, 
               start,
