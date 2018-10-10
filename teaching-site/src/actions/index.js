@@ -54,7 +54,13 @@ export const signIn = (formProps, callback) => dispatch => {
   };  
 
 export const signOut = (callback) => {
-    localStorage.removeItem("token");
+    if (localStorage.getItem('token')) {
+        localStorage.removeItem('token');
+    }
+
+    if (localStorage.getItem('fbToken')) {
+        localStorage.removeItem('fbToken');
+    }
     callback();
     return {
       type: AUTH_USER,

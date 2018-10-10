@@ -58,9 +58,19 @@ class Scheduler extends Component {
  
       handleSelect = ({ start, end }) => {
         const token = localStorage.getItem("token");
-        const decoded = jwt_decode(token);
-        let  username = decoded.username;
-        
+        let fbToken = localStorage.getItem("fbToken");
+        let username;
+
+        if (token) {
+          const decoded = jwt_decode(token);
+          username = decoded.username;
+        }
+
+        if (fbToken) {
+          let fbToken = JSON.parse(localStorage.getItem('fbToken'))
+          username = fbToken.username;
+        }
+
         const title = username;
         const diff = Math.abs((start - end) / 60000);
 
@@ -98,8 +108,18 @@ class Scheduler extends Component {
 
       removeEvent(event) {
         const token = localStorage.getItem("token");
-        const decoded = jwt_decode(token);
-        let username = decoded.username;
+        let fbToken = localStorage.getItem("fbToken");
+        let username;
+
+        if (token) {
+          const decoded = jwt_decode(token);
+          username = decoded.username;
+        }
+
+        if (fbToken) {
+          let fbToken = JSON.parse(localStorage.getItem('fbToken'))
+          username = fbToken.username;
+        }
 
         if(event.title === username){
         const { events } = this.state;
@@ -132,8 +152,18 @@ class Scheduler extends Component {
 
       moveEvent({ event, start, end }) {
         const token = localStorage.getItem("token");
-        const decoded = jwt_decode(token);
-        let  username = decoded.username;
+        let fbToken = localStorage.getItem("fbToken");
+        let username;
+
+        if (token) {
+          const decoded = jwt_decode(token);
+          username = decoded.username;
+        }
+
+        if (fbToken) {
+          let fbToken = JSON.parse(localStorage.getItem('fbToken'))
+          username = fbToken.username;
+        }
 
         if(event.title === username){
           const { events } = this.state;
@@ -163,8 +193,18 @@ class Scheduler extends Component {
 
   render() {
     const token = localStorage.getItem("token");
-    const decoded = jwt_decode(token);
-    let  username = decoded.username;
+    let fbToken = localStorage.getItem("fbToken");
+    let username;
+
+        if (token) {
+          const decoded = jwt_decode(token);
+          username = decoded.username;
+        }
+
+        if (fbToken) {
+          let fbToken = JSON.parse(localStorage.getItem('fbToken'))
+          username = fbToken.username;
+        }
 
     let spinner;
 

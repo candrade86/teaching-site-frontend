@@ -13,9 +13,8 @@ export default ChildComponent => {
 
     shouldNavigateAway() {
       const token = localStorage.getItem('token');
-      console.log(token)
       const fbToken = localStorage.getItem('fbToken');
-      console.log(fbToken)
+      
       if (!token) {
         if(!fbToken){
         this.props.history.push('/');

@@ -10,11 +10,11 @@ class Facebook extends Component {
     
     responseFacebook = (response, callback) => {
       localStorage.setItem('fbToken', JSON.stringify({token:response.accessToken, username: response.name}))
-       let fbToken = JSON.parse(localStorage.getItem('fbToken'))
-       this.props.history.push(`/student/${fbToken.username}`)
+      let fbToken = JSON.parse(localStorage.getItem('fbToken'))
+      this.props.history.push(`/student/${fbToken.username}`)
     }
 
-    componentClicked = () => console.log('clicked');
+    // componentClicked = () => console.log('clicked');
 
   render() {
 
@@ -24,7 +24,7 @@ class Facebook extends Component {
             appId='404977906697751'
             autoLoad={false}
             fields='name,email,picture'
-            onClick={this.componentClicked}
+            // onClick={this.componentClicked}
             callback={this.responseFacebook}
             cssClass='facebook-button'
         />

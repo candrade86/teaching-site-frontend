@@ -18,9 +18,8 @@ import {
 class Student extends Component {
   render() {
     let username;
-    // let token;
+  
       if (localStorage.getItem('token')){
-        console.log('inside first statement')
         token = localStorage.getItem('token')
         
         let token = localStorage.getItem("token");   
@@ -32,7 +31,6 @@ class Student extends Component {
       if(localStorage.getItem('fbToken')){
         let token = JSON.parse(localStorage.getItem('fbToken'))
         username = token.username;
-       console.log('inside second statement')
       
       }
 
