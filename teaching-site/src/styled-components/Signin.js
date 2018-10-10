@@ -116,7 +116,7 @@ export const OrWrap = styled.div`
 export const HRWrap = styled.div`
     display: flex;
     justify-content: flex-start;
-    width: 100%;
+    width: 40%;
 `
 
 export const HR = styled.hr`

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { signIn } from '../actions';
 
+import Facebook from './Facebook';
 import profileRedirect from '../hoc/profileRedirect';
 import Spinner from '../components/UI/Spinner';
 
@@ -90,8 +91,9 @@ onSubmit(event) {
                             onChange={this.handleInput}
                             value={this.state.password} 
                         />
-                        <OrWrap><HRWrap><HR /></HRWrap></OrWrap>
                         <Button>Sign in</Button>
+                        <OrWrap><HRWrap><HR /></HRWrap>or<HRWrap><HR /></HRWrap></OrWrap>
+                        <Facebook />
                     </Form>
                 </SigninInner> 
             </SigninWrap>
