@@ -188,6 +188,35 @@ class Scheduler extends Component {
         }
       }
 
+      eventStyleGetter = (event, start, end, isSelected) => {
+        const token = localStorage.getItem("token");
+        let fbToken = localStorage.getItem("fbToken");
+        let username;
+      
+        let style = {
+          backgroundColor: '#6a6b8c'
+        }
+
+        if (token) {
+          const decoded = jwt_decode(token);
+          username = decoded.username;
+          
+          if(event.title === username){
+            style.backgroundColor = '#4a67e8';
+          }
+        }
+
+
+        // if (fbToken) {
+        //   let fbToken = JSON.parse(localStorage.getItem('fbToken'))
+        //   username = `${fbToken.username} #${fbToken.id}`;
+        // }
+
+        return {
+          style: style
+        }
+      }
+
   render() {
     const token = localStorage.getItem("token");
     let fbToken = localStorage.getItem("fbToken");
@@ -229,6 +258,7 @@ class Scheduler extends Component {
             onEventDrop={this.moveEvent}
             onSelectSlot={event => this.handleSelect(event)}
             onDoubleClickEvent={event => this.removeEvent(event)}
+            eventPropGetter={event => this.eventStyleGetter(event)}
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
             style={{ fontSize: '2rem', height: '90vh', width: '100%', background: 'white' }}
