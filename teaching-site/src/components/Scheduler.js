@@ -252,6 +252,7 @@ class Scheduler extends Component {
           </Header>
           <DragAndDropCalendar
             selectable
+            showMultiDayTimes={true}
             culture={moment.tz.guess()}
             localizer={localizer}
             events={this.state.events}
