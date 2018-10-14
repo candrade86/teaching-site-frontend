@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import requireAuth from '../hoc/requireAuth';
 
-import { signOut } from '../actions';
 import jwt_decode from 'jwt-decode';
 
 import {  
@@ -36,16 +35,7 @@ class Student extends Component {
 
     return (
       <Container>
-        <Top>
-          <Logout 
-            onClick={()=> this.props.signOut(()=> {
-              this.props.history.push('/signin');
-            })
-          }> 
-            Logout as {username}
-          </Logout>
-  
-        </Top>
+        <Top />
         <Middle>
           <Schedule
             onClick={()=> this.props.history.push(`/scheduler/${username}`)}
@@ -59,4 +49,4 @@ class Student extends Component {
   }
 }
 
-export default connect(null, { signOut })(requireAuth(withRouter(Student)));
+export default connect(null)(requireAuth(withRouter(Student)));

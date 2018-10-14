@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signOut, createEvent, deleteEvent, updateEvent } from '../actions';
+import { createEvent, deleteEvent, updateEvent } from '../actions';
 import requireAuth from '../hoc/requireAuth';
 import Spinner from './UI/Spinner';
 
@@ -206,12 +206,6 @@ class Scheduler extends Component {
           }
         }
 
-
-        // if (fbToken) {
-        //   let fbToken = JSON.parse(localStorage.getItem('fbToken'))
-        //   username = `${fbToken.username} #${fbToken.id}`;
-        // }
-
         return {
           style: style
         }
@@ -241,15 +235,7 @@ class Scheduler extends Component {
     return (
       <Container>
         {spinner}
-          <Header>
-          <Logout 
-            onClick={()=> this.props.signOut(()=> {
-              this.props.history.push('/signin');
-            })
-          }> 
-            Logout as {username}
-          </Logout>
-          </Header>
+      
           <DragAndDropCalendar
             selectable
             showMultiDayTimes={true}
@@ -280,4 +266,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent, signOut })(requireAuth(Scheduler));
+export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent })(requireAuth(Scheduler));
