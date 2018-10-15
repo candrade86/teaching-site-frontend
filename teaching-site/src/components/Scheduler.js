@@ -55,6 +55,25 @@ class Scheduler extends Component {
         })
       }
 
+      componentDidUpdate(prevProps, prevState) {
+        if (prevProps.events !== this.props.events) {
+          fetch(`${API_URL}/api/event`)
+          .then(response => response.json())
+          .then(data => {
+            let newEvents = data.map((e)=> {
+              return {
+                _id: e._id, 
+                title: e.title,  
+                end: new Date(e.end),
+                start: new Date(e.start)
+              }
+          })
+          if(this._ismounted = true){
+            this.setState({ events: newEvents });
+          }
+        })
+      }
+      }
  
       handleSelect = ({ start, end }) => {
         const token = localStorage.getItem("token");
