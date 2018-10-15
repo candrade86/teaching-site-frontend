@@ -31,6 +31,7 @@ export const Logout = styled.p`
 
 export const Middle = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 

@@ -42,6 +42,11 @@ class Student extends Component {
           > 
             Shedule a session 
           </Schedule>
+          <Schedule
+            onClick={()=> this.props.history.push('/billing')}
+          > 
+            Buy a package
+          </Schedule>
           
         </Middle>
       </Container>
