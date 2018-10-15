@@ -30,6 +30,7 @@ export const Logout = styled.p`
 export const Middle = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
 
     /* border: solid purple; */
 `

@@ -6,34 +6,67 @@ import { Container, Title, Logout } from '../../styled-components/Nav';
 import jwt_decode from 'jwt-decode';
 
 class Nav extends Component {
-    render(){
-        let username;
-  
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: ''
+        }
+    }
+
+    componentDidMount() {
         if (localStorage.getItem('token')){
-          token = localStorage.getItem('token')
+        
+            let token = localStorage.getItem("token");   
+            const decoded = jwt_decode(token);
+            this.setState({ username: decoded.username }) 
+          }
           
-          let token = localStorage.getItem("token");   
-          const decoded = jwt_decode(token);
-          username = decoded.username;
-          console.log(username)
-        }
+    
+          if(localStorage.getItem('fbToken')){
+            let token = JSON.parse(localStorage.getItem('fbToken'))
+            this.setState({ username: token.username }) 
+          
+          }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if (localStorage.getItem('token')){
         
+            let token = localStorage.getItem("token");   
+            const decoded = jwt_decode(token);
+            
+            if (this.state.username !== decoded.username) {
+                this.setState({ username: decoded.username })
+            } 
+          }
+          
+    
+          if(localStorage.getItem('fbToken')){
+            let token = JSON.parse(localStorage.getItem('fbToken'))
+
+            if  (this.state.username !== token.username) {
+                this.setState({ username: token.username })
+            } 
+          
+          }
+    }
+
+    render(){
   
-        if(localStorage.getItem('fbToken')){
-          let token = JSON.parse(localStorage.getItem('fbToken'))
-          username = token.username;
-        
-        }
+   
         return (
             <Container>
             <Title>Teaching Site</Title>
-            <Logout 
-                onClick={()=> this.props.signOut(()=> {
-                this.props.history.push('/signin');
-                })
-            }>
-            Log out as {username}
-            </Logout>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+                <Logout 
+                    onClick={()=> this.props.signOut(()=> {
+                    this.props.history.push('/signin');
+                    })
+                }>
+                
+                Log out {this.state.username}
+                </Logout>
+            </div>
             </Container>
         )
     }

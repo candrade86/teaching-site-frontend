@@ -19,11 +19,15 @@ export const Title = styled.h1`
 `
 
 export const Logout = styled.p`
+    width: 20%;
     font-size: 2rem;
     color: white;
     padding: 2%;
+    text-align: center;
 
     &:hover {
         cursor: pointer;
     }
+
+    /* border: solid pink; */
 `
