@@ -56,7 +56,7 @@ class Nav extends Component {
    
         return (
             <Container>
-            <Title>Teaching Site</Title>
+            <Title onClick={()=> this.props.history.push(`/student/${this.state.username}`)}>Teaching Site</Title>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
                 <Logout 
                     onClick={()=> this.props.signOut(()=> {
