@@ -14,7 +14,7 @@ export const Conversation = styled.div`
     height: 50vh;
     background: grey;
 
-    border: solid purple;
+    /* border: solid purple; */
 
 `
 export const Pronunciation = styled.div`
@@ -24,7 +24,7 @@ export const Pronunciation = styled.div`
     height: 50vh;
     background: grey;
 
-    border: solid purple;
+    /* border: solid purple; */
 `
 
 export const Top = styled.div`
@@ -34,7 +34,7 @@ export const Top = styled.div`
     align-items: center;
     flex: 8;
     
-    border: solid blue;
+    /* border: solid blue; */
 `
 export const Top1 = styled.div`
     display: flex;
@@ -54,7 +54,8 @@ export const Bot = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: solid red;
+
+    /* border: solid red; */
 `
 export const Title = styled.h1`
     font-size: 2.5rem;

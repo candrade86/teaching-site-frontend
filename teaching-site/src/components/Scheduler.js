@@ -209,7 +209,7 @@ class Scheduler extends Component {
 
       eventStyleGetter = (event, start, end, isSelected) => {
         const token = localStorage.getItem("token");
-        let fbToken = localStorage.getItem("fbToken");
+        let fbToken = JSON.parse(localStorage.getItem("fbToken"));
         let username;
       
         let style = {
@@ -220,6 +220,14 @@ class Scheduler extends Component {
           const decoded = jwt_decode(token);
           username = decoded.username;
           
+          if(event.title === username){
+            style.backgroundColor = '#4a67e8';
+          }
+        }
+
+        if (fbToken) {
+          username = `${fbToken.username} #${fbToken.id}`;
+          console.log('color changer', username)
           if(event.title === username){
             style.backgroundColor = '#4a67e8';
           }
