@@ -101,22 +101,9 @@ class Scheduler extends Component {
               start,
               end
           }
-            this.props.createEvent(eventProps, ()=> {
-              fetch(`${API_URL}/api/event`)
-              .then(response => response.json())
-              .then(data => {
-                let newEvents = data.map((e)=> {
-                  return {
-                    _id: e._id, 
-                    title: e.title,  
-                    end: new Date(e.end),
-                    start: new Date(e.start)
-                  }
-              })
-                this.setState({ events: newEvents });
-              })
 
-            })
+          this.props.createEvent(eventProps)
+  
           }
         }
       }       
@@ -146,22 +133,8 @@ class Scheduler extends Component {
         });
           let id = idArr.filter(i => i !== undefined)
 
-          if (id){
-            this.props.deleteEvent(id, () => {
-              fetch(`${API_URL}/api/event`)
-              .then(response => response.json())
-              .then(data => {
-                let newEvents = data.map((e)=> {
-                  return {
-                    _id: e._id, 
-                    title: e.title,  
-                    end: new Date(e.end),
-                    start: new Date(e.start)
-                  }
-                })
-                this.setState({ events: newEvents });
-              })
-            });
+          if (id) {
+            this.props.deleteEvent(id)
           }
         };
       };
@@ -189,21 +162,7 @@ class Scheduler extends Component {
           const nextEvents = [...events]
           nextEvents.splice(idx, 1, updatedEvent)
           this.setState({ events: nextEvents });
-          this.props.updateEvent(id, {...event, start, end}, ()=> {
-            fetch(`${API_URL}/api/event`)
-            .then(response => response.json())
-            .then(data => {
-              let newEvents = data.map((e)=> {
-                return {
-                  _id: e._id, 
-                  title: e.title,  
-                  end: new Date(e.end),
-                  start: new Date(e.start)
-                }
-              })
-            })
-          })
-        // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
+          this.props.updateEvent(id, {...event, start, end })
         }
       }
 
