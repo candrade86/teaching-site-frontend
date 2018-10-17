@@ -36,11 +36,37 @@ class Billing extends Component {
       console.log('Cancelled payment!', data);
     return (
       <Container>
-        <h1 style={{fontSize: '3rem', color: 'white'}}> Billing Page </h1>
-        <Conversation>
+        <Pronunciation>
           <Top>
             <Top1>
               <Title>Conversational English</Title>
+            </Top1>
+            <Top2>
+              <Price>$90</Price>
+            </Top2>
+          </Top>
+          <Bot>
+            <PayPal
+              client={CLIENT}
+              env={ENV}
+              commit={true}
+              currency={'USD'}
+              total={90}
+              onSuccess={onSuccess}
+              onError={onError}
+              onCancel={onCancel}
+            />
+            <Checkout
+                name={'Conversational English'}
+                description={'kamehameha!!!'}
+                amount={1}
+            />
+          </Bot>
+        </Pronunciation>
+        <Conversation>
+          <Top>
+            <Top1>
+              <Title>American English Pronunciation</Title>
             </Top1>
             <Top2>
               <Price>$90</Price>

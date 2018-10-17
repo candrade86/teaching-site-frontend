@@ -64,7 +64,7 @@ class Nav extends Component {
                     })
                 }>
                 
-                Log out {this.state.username}
+                Log out as {this.state.username}
                 </Logout>
             </div>
             </Container>

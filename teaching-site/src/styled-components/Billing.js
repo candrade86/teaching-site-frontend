@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     min-height: 100vh;
@@ -19,6 +18,13 @@ export const Conversation = styled.div`
 
 `
 export const Pronunciation = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    height: 50vh;
+    background: grey;
+
+    border: solid purple;
 `
 
 export const Top = styled.div`
