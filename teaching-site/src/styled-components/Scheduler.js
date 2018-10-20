@@ -17,6 +17,12 @@ export const Header = styled.div`
 
     /* border: solid red; */
 `
+export const Body = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 90vh;
+`
 
 export const Logout = styled.p`
     font-size: 2rem;

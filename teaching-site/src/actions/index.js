@@ -111,14 +111,13 @@ export const updateEvent = (id, update, callback) => dispatch => {
         })
 }
 
-export const deleteEvent = (id, callback) => dispatch => {
+export const deleteEvent = (id) => dispatch => {
     dispatch({ type: DELETING_EVENT }); 
     
     axios
         .delete (`/api/event/delete-event/${id}`)
         .then(response => {
             dispatch({ type: DELETED_EVENT, payload: response.data })
-            callback();
         })
         .catch(err => {
             dispatch({ type: ERROR, errorMessage: 'Error deleting event.', err })

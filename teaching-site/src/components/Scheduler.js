@@ -14,7 +14,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import {
     Container,
     Header,
-    Logout
+    Body,
 } from '../styled-components/Scheduler';
 
 import jwt_decode from 'jwt-decode';
@@ -72,7 +72,7 @@ class Scheduler extends Component {
             this.setState({ events: newEvents });
           }
         })
-      }
+       }
       }
  
       handleSelect = ({ start, end }) => {
@@ -131,6 +131,12 @@ class Scheduler extends Component {
             return e._id;
           }
         });
+        let filtered = events.map(e=> {
+          if(e.statrt !== event.start){
+            return e;
+          }
+        })
+        this.setState({events: filtered})
           let id = idArr.filter(i => i !== undefined)
 
           if (id) {
@@ -178,6 +184,7 @@ class Scheduler extends Component {
         if (token) {
           const decoded = jwt_decode(token);
           username = decoded.username;
+          console.log('color changer', username)
           
           if(event.title === username){
             style.backgroundColor = '#4a67e8';
@@ -221,7 +228,8 @@ class Scheduler extends Component {
     return (
       <Container>
         {spinner}
-      
+        <Header />
+        <Body>
           <DragAndDropCalendar
             selectable
             showMultiDayTimes={true}
@@ -237,6 +245,7 @@ class Scheduler extends Component {
             style={{ fontSize: '2rem', height: '90vh', width: '100%', background: 'white' }}
             views={{ week: true, day: true }}            
           />
+        </Body>
       </Container>
     )
   }
