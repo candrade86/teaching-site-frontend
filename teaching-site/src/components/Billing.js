@@ -4,6 +4,8 @@ import {
   Container,
   Conversation,
   Pronunciation,
+  Header,
+  Body,
   Top,
   Top1,
   Top2,
@@ -36,6 +38,8 @@ class Billing extends Component {
       console.log('Cancelled payment!', data);
     return (
       <Container>
+        <Header />
+        <Body>
         <Pronunciation>
           <Top>
             <Top1>
@@ -90,6 +94,7 @@ class Billing extends Component {
             />
           </Bot>
         </Conversation>
+        </Body>
       </Container>
     )
   }
