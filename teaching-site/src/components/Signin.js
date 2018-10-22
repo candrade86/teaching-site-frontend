@@ -59,13 +59,14 @@ onSubmit(event) {
   render() {
     let spinner;
 
-    if (this.props.signingIn === true) {
+    if (this.props.signingIn === true && this.props.error === false) {
         spinner = <Spinner />;
       }
 
     return (
         <Container>
             {spinner}
+            {console.log(this.props.error)}
             <TitleWrap>
                 <Title>Sign in</Title>
                 <Slogan>Catchy teaching website slogan here.</Slogan>
@@ -105,7 +106,8 @@ onSubmit(event) {
 
 function mapStateToProps(state) {
     return {
-        signingIn: state.auth.signingIn
+        signingIn: state.auth.signingIn,
+        error: state.auth.errorMessage
     };
   }
 

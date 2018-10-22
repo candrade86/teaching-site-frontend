@@ -28,7 +28,7 @@ export const Body = styled.div`
         flex-direction: column;
    }
 
-   border: solid yellow;
+   /* border: solid yellow; */
 `
 
 export const Conversation = styled.div`
