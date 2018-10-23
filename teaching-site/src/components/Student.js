@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import requireAuth from '../hoc/requireAuth';
+import { fetchClasses } from '../actions';
 
 import jwt_decode from 'jwt-decode';
 
@@ -15,6 +16,9 @@ import {
 
 
 class Student extends Component {
+  componentDidMount() {
+    this.props.fetchClasses();
+  }
   render() {
     let username;
   
@@ -35,6 +39,7 @@ class Student extends Component {
 
     return (
       <Container>
+        {console.log(this.props.classes)}
         <Top />
         <Middle>
           <Schedule
@@ -56,9 +61,10 @@ class Student extends Component {
 
 function mapStateToProps(state) {
   return {
-      events: state.auth.signingIn,
+      classes: state.event.classes,
+      fetchingClasses: state.event.fetchingEvents,
       error: state.auth.errorMessage
   };
 }
 
-export default connect(null)(requireAuth(withRouter(Student)));
+export default connect(mapStateToProps, { fetchClasses })(requireAuth(withRouter(Student)));

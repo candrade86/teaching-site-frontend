@@ -82,12 +82,12 @@ export const fetchEvents = () => dispatch => {
 }
 
 export const fetchClasses = () => dispatch => {
-    dispatch({ type: FETCHING_EVENTS })
+    dispatch({ type: FETCHING_CLASSES })
 
     axios
         .post ("/api/event/classes")
         .then(response => {
-            dispatch({ type: FETCHED_EVENTS, payload: response.data })
+            dispatch({ type: FETCHED_CLASSES, payload: response.data })
         })
         .catch(err => {
             dispatch({ type: ERROR, errorMessage: 'Error fetching classes', err })
