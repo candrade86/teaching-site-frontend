@@ -12,6 +12,7 @@ import {
 
 const INITIAL_STATE = {
     events: [],
+    classes: [],
     fetchingEvents: false,
     creatingEvent: false,
     deletingEvent: false,

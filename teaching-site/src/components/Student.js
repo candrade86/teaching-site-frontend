@@ -40,7 +40,7 @@ class Student extends Component {
           <Schedule
             onClick={()=> this.props.history.push(`/scheduler/${username}`)}
           > 
-            Shedule a session 
+            Schedule a session 
           </Schedule>
           <Schedule
             onClick={()=> this.props.history.push('/billing')}
@@ -52,6 +52,13 @@ class Student extends Component {
       </Container>
     )
   }
+}
+
+function mapStateToProps(state) {
+  return {
+      events: state.auth.signingIn,
+      error: state.auth.errorMessage
+  };
 }
 
 export default connect(null)(requireAuth(withRouter(Student)));

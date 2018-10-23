@@ -81,6 +81,20 @@ export const fetchEvents = () => dispatch => {
         })
 }
 
+export const fetchClasses = () => dispatch => {
+    dispatch({ type: FETCHING_EVENTS })
+
+    axios
+        .post ("/api/event/classes")
+        .then(response => {
+            dispatch({ type: FETCHED_EVENTS, payload: response.data })
+        })
+        .catch(err => {
+            dispatch({ type: ERROR, errorMessage: 'Error fetching classes', err })
+        })
+}
+
+
 export const createEvent = (eventProps, callback) => dispatch =>  {
     dispatch({ type: CREATING_EVENT }); 
     
