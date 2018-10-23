@@ -184,7 +184,6 @@ class Scheduler extends Component {
         if (token) {
           const decoded = jwt_decode(token);
           username = decoded.username;
-          console.log('color changer', username)
           
           if(event.title === username){
             style.backgroundColor = '#4a67e8';
@@ -193,7 +192,7 @@ class Scheduler extends Component {
 
         if (fbToken) {
           username = `${fbToken.username} #${fbToken.id}`;
-          console.log('color changer', username)
+          
           if(event.title === username){
             style.backgroundColor = '#4a67e8';
           }

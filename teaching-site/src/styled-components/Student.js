@@ -43,6 +43,7 @@ export const Schedule = styled.p`
     font-size: 3rem;
      &:hover {
          font-size: 3.2rem;
+         cursor: pointer;
      }
 
 `
