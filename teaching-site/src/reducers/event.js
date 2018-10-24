@@ -33,7 +33,7 @@ export default function(state = INITIAL_STATE, action) {
     case FETCHING_CLASSES:
         return { ...state, fetchingClasses: true };
     case FETCHED_CLASSES:
-        return { ...state, classes: [ ...state.classes, action.payload ], fetchingEvents: false };
+        return { ...state, classes: action.payload, fetchingEvents: false };
     case CREATING_EVENT:
         return { ...state, creatingEvent: true };
     case CREATED_EVENT:

@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 import requireAuth from '../hoc/requireAuth';
 import { fetchClasses } from '../actions';
 
+import ClassList from './ClassList';
+
 import jwt_decode from 'jwt-decode';
 
 import {  
@@ -16,6 +18,7 @@ import {
 
 
 class Student extends Component {
+
   componentDidMount() {
     let username;
     
@@ -35,7 +38,7 @@ class Student extends Component {
       this.props.fetchClasses(username);
     } 
   }
-  
+
   render() {
     let username;
   
@@ -56,7 +59,7 @@ class Student extends Component {
 
     return (
       <Container>
-        {/* {console.log(this.props.classes)} */}
+        {console.log(this.props.classes)}
         <Top />
         <Middle>
           <Schedule
@@ -71,6 +74,7 @@ class Student extends Component {
           </Schedule>
           
         </Middle>
+        <ClassList classes={this.props.classes} />
       </Container>
     )
   }

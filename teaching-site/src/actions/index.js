@@ -83,7 +83,7 @@ export const fetchEvents = () => dispatch => {
         })
 }
 
-export const fetchClasses = (username) => dispatch => {
+export const fetchClasses = username => dispatch => {
     dispatch({ type: FETCHING_CLASSES })
     axios
         .post ("/api/event/classes", { username } )
