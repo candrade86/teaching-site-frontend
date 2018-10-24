@@ -17,8 +17,25 @@ import {
 
 class Student extends Component {
   componentDidMount() {
-    this.props.fetchClasses();
+    let username;
+    
+    const token = localStorage.getItem("token");
+    let fbToken = localStorage.getItem("fbToken");
+        
+
+    if (token) {
+      const decoded = jwt_decode(token);
+      username = decoded.username;
+      this.props.fetchClasses(username);
+    }
+
+    if (fbToken) {
+      let fbToken = JSON.parse(localStorage.getItem('fbToken'))
+      username = `${fbToken.username} #${fbToken.id}`;
+      this.props.fetchClasses(username);
+    } 
   }
+  
   render() {
     let username;
   
@@ -39,7 +56,7 @@ class Student extends Component {
 
     return (
       <Container>
-        {console.log(this.props.classes)}
+        {/* {console.log(this.props.classes)} */}
         <Top />
         <Middle>
           <Schedule

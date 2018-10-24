@@ -6,6 +6,8 @@ import {
     AUTH_USER,
     FETCHING_EVENTS,
     FETCHED_EVENTS,
+    FETCHING_CLASSES,
+    FETCHED_CLASSES,
     CREATING_EVENT,
     CREATED_EVENT,
     DELETING_EVENT,
@@ -81,11 +83,10 @@ export const fetchEvents = () => dispatch => {
         })
 }
 
-export const fetchClasses = () => dispatch => {
+export const fetchClasses = (username) => dispatch => {
     dispatch({ type: FETCHING_CLASSES })
-
     axios
-        .post ("/api/event/classes")
+        .post ("/api/event/classes", { username } )
         .then(response => {
             dispatch({ type: FETCHED_CLASSES, payload: response.data })
         })
@@ -93,7 +94,6 @@ export const fetchClasses = () => dispatch => {
             dispatch({ type: ERROR, errorMessage: 'Error fetching classes', err })
         })
 }
-
 
 export const createEvent = (eventProps, callback) => dispatch =>  {
     dispatch({ type: CREATING_EVENT }); 
