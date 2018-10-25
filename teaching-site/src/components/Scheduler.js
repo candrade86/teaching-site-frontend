@@ -26,11 +26,14 @@ let API_URL = process.env.NODE_ENV === 'production'
 ?  process.env.REACT_APP_API_URL_PROD
 : process.env.REACT_APP_API_URL_DEV;
 
+
+
 class Scheduler extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          events: this.props.events
+          events: this.props.events,
+          day: ''
         }
     
         this.moveEvent = this.moveEvent.bind(this);
@@ -74,6 +77,23 @@ class Scheduler extends Component {
         })
        }
       }
+
+      dayOfWeek(start){
+      
+        let d = new Date(start);
+        let weekday = new Array(7);
+        weekday[0] = 'Sunday';
+        weekday[1] = 'Monday';
+        weekday[2] = 'Tuesday';
+        weekday[3] = 'Wednesday';
+        weekday[4] = 'Thursday';
+        weekday[5] = 'Friday';
+        weekday[6] = 'Saturday';
+      
+        return weekday[d.getDay()]
+       
+          
+      }
  
       handleSelect = ({ start, end }) => {
         const token = localStorage.getItem("token");
@@ -90,8 +110,13 @@ class Scheduler extends Component {
           username = `${fbToken.username} #${fbToken.id}`;
         }
 
+      
+        let day = this.dayOfWeek(start)
+        
         const title = username;
         const diff = Math.abs((start - end) / 60000);
+
+    
 
         if (diff <= 60){
           if (diff === 30){
@@ -99,11 +124,11 @@ class Scheduler extends Component {
             let eventProps = {
               title, 
               start,
-              end
+              end,
+              day  
           }
 
           this.props.createEvent(eventProps)
-  
           }
         }
       }       

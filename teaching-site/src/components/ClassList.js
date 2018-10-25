@@ -4,8 +4,8 @@ import { Fragment } from 'react';
 const ClassList = props => {
     let classes = props.classes.map((c, i)=> {
         return (
-            <div style={{ color: 'white', fontSize: '3rem' }}>
-                <h3>{c.start}</h3>
+            <div key={c._id} style={{ color: 'white', fontSize: '3rem' }}>
+                <h3>{c.day}{c.start}</h3>
             </div>
         )
     })
