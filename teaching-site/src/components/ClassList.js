@@ -1,6 +1,8 @@
 import React from 'react'
 import { Fragment } from 'react';
 
+import { ClassesWrap, ClassWrap } from '../styled-components/ClassList';
+
 const ClassList = props => {
     let monthText;
     let classes = props.classes.map((c, i)=> {
@@ -44,16 +46,18 @@ const ClassList = props => {
         }
 
         return (
-            <div key={c._id} style={{ color: 'white', fontSize: '3rem' }}>
+            <ClassWrap key={c._id} style={{ color: 'white', fontSize: '3rem' }}>
                 <h3>{`${c.day} ${monthText} ${nDate} ${year} ${startingAt}-${endingAt}`}</h3>
-            </div>
+            </ClassWrap>
         )
     })
 
   return (
     <Fragment>
         <h1 style={{ color: 'white', fontSize: '3rem' }}> Class list will render here</h1>
-        {classes}    
+        <ClassesWrap>
+            {classes}    
+        </ClassesWrap>
     </Fragment>
   )
 }
