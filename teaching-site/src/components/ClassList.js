@@ -4,9 +4,18 @@ import { Fragment } from 'react';
 const ClassList = props => {
     let monthText;
     let classes = props.classes.map((c, i)=> {
+        let year = c.start.slice(0,4).toString();
         let month = Math.abs(c.start.slice(4,7)).toString();
         let nDate = Math.abs(c.start.slice(7,10)).toString();
-        console.log("check", month)
+        let startTime = new Date(c.start);
+        let endTime = new Date(c.end);
+
+        let startMinutes = (startTime.getMinutes() != 0 ) ? startTime.getUTCMinutes() : startTime.getUTCMinutes() + '0';
+        let endMinutes = (endTime.getMinutes() != 0 ) ? endTime.getUTCMinutes() : startTime.getUTCMinutes() + '0';
+
+        let startingAt = `${startTime.getUTCHours()}:${startMinutes} UTC`;
+        let endingAt = `${endTime.getUTCHours()}:${endMinutes} UTC`;  
+        console.log('year', year)
         switch(month) {
             case '1': monthText = 'Jan';
             break;
@@ -36,8 +45,7 @@ const ClassList = props => {
 
         return (
             <div key={c._id} style={{ color: 'white', fontSize: '3rem' }}>
-                {console.log('hey', month)}
-                <h3>{`${c.day} ${monthText} ${nDate}`}</h3>
+                <h3>{`${c.day} ${monthText} ${nDate} ${year} ${startingAt}-${endingAt}`}</h3>
             </div>
         )
     })
