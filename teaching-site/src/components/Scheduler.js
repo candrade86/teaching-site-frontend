@@ -116,8 +116,9 @@ class Scheduler extends Component {
         const title = username;
         const diff = Math.abs((start - end) / 60000);
 
-    
-
+        let current = new Date();
+        
+        if(start > current) {
         if (diff <= 60){
           if (diff === 30){
               end = new Date(end.getTime() + 1800000)
@@ -130,6 +131,7 @@ class Scheduler extends Component {
 
           this.props.createEvent(eventProps)
           }
+        }
         }
       }       
     
