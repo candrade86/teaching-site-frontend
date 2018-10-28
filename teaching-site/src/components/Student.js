@@ -74,7 +74,9 @@ class Student extends Component {
           </Schedule>
           
         </Middle>
+        <div style={{ border: 'solid red', height: '80%'}}>
         <ClassList classes={this.props.classes} />
+        </div>
       </Container>
     )
   }

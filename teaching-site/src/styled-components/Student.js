@@ -14,6 +14,7 @@ export const Container = styled.div`
 export const Top = styled.div`
     display: flex;
     justify-content: flex-end;
+    height: 20vh;
     width: 100%;
 
     /* border: solid pink; */

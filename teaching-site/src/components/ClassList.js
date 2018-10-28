@@ -53,12 +53,9 @@ const ClassList = props => {
     })
 
   return (
-    <Fragment>
-        <h1 style={{ color: 'white', fontSize: '3rem' }}> Class list will render here</h1>
         <ClassesWrap>
             {classes}    
         </ClassesWrap>
-    </Fragment>
   )
 }
 
