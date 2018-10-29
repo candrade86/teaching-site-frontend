@@ -22,7 +22,7 @@ ReactDOM.render(
         <BrowserRouter>
             <App>
                 <Route path='/' exact component={Signup} />
-                <Route path='/(student|scheduler|billing)/' component={Nav} />
+                <Route path='/(student|scheduler|billing|session)/' component={Nav} />
                 <Route path='/signin' component={Signin} />
                 <Route path='/student/:id' component={Student} />
                 <Route path='/session/:id' component={Session} />
