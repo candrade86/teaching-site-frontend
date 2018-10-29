@@ -32,9 +32,11 @@ export const Logout = styled.p`
 
 export const Middle = styled.div`
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
+    width: 100%;
+    height: 10vh;
 
     /* border: solid purple; */
 `

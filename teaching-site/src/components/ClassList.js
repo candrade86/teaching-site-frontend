@@ -54,7 +54,7 @@ const ClassList = props => {
 
   return (
         <ClassesWrap>
-            {classes}    
+                {classes}
         </ClassesWrap>
   )
 }
