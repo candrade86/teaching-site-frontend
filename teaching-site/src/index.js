@@ -12,6 +12,7 @@ import Signin from './components/Signin';
 import Student from './components/Student';
 import Scheduler from './components/Scheduler';
 import Billing from './components/Billing';
+import Session from './components/Session';
 
 
 import registerServiceWorker from './registerServiceWorker';
@@ -24,6 +25,7 @@ ReactDOM.render(
                 <Route path='/(student|scheduler|billing)/' component={Nav} />
                 <Route path='/signin' component={Signin} />
                 <Route path='/student/:id' component={Student} />
+                <Route path='/session/:id' component={Session} />
                 <Route path='/scheduler/:id' component={Scheduler} /> 
                 <Route path='/billing' component={Billing} />   
             </App>

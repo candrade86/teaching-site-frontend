@@ -1,5 +1,6 @@
 import React from 'react'
 import { Fragment } from 'react';
+import { withRouter } from 'react-router';
 
 import { ClassesWrap, ClassWrap } from '../styled-components/ClassList';
 
@@ -46,7 +47,7 @@ const ClassList = props => {
         }
 
         return (
-            <ClassWrap key={c._id} style={{ color: 'white', fontSize: '3rem' }}>
+            <ClassWrap onClick={()=> props.history.push(`/session/${c._id}`)} key={c._id} style={{ color: 'white', fontSize: '3rem' }}>
                 <h3>{`${c.day} ${monthText} ${nDate} ${year} ${startingAt}-${endingAt}`}</h3>
             </ClassWrap>
         )
@@ -59,4 +60,4 @@ const ClassList = props => {
   )
 }
 
-export default ClassList;
+export default withRouter(ClassList);
