@@ -8,6 +8,9 @@ export const FETCHED_EVENTS = 'fetched_events';
 export const FETCHING_CLASSES = 'fetching_classes';
 export const FETCHED_CLASSES = 'fetched_classes';
 
+export const FETCHING_SESSION = 'fetching_session';
+export const FETCHED_SESSION = 'fetched_session';
+
 export const CREATING_EVENT = 'creating_event';
 export const CREATED_EVENT = 'created_event';
 
