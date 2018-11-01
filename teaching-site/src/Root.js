@@ -19,7 +19,6 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 export default ({ children, initialState = {} }) => {
   const store = createStore(
     persistedReducer,
-    // reducers,
     initialState,
     applyMiddleware(reduxThunk, logger)
   );

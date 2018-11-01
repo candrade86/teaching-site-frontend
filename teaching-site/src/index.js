@@ -4,9 +4,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import { BrowserRouter, Route } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
-
-import { createBrowserHistory } from 'history';
 
 import Root from '../src/Root';
 import Nav from './components/UI/Nav';
