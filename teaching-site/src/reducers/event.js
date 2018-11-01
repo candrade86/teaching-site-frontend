@@ -3,7 +3,9 @@ import {
     FETCHING_EVENTS, 
     FETCHED_EVENTS,
     FETCHING_CLASSES,
-    FETCHED_CLASSES, 
+    FETCHED_CLASSES,
+    FETCHING_SESSION,
+    FETCHED_SESSION, 
     CREATING_EVENT,
     CREATED_EVENT, 
     DELETING_EVENT,
@@ -15,8 +17,10 @@ import {
 const INITIAL_STATE = {
     events: [],
     classes: [],
+    session: '',
     fetchingEvents: false,
     fetchingClasses: false,
+    fetchingSession: false,
     creatingEvent: false,
     deletingEvent: false,
     updatingEvent: false,
@@ -34,6 +38,10 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, fetchingClasses: true };
     case FETCHED_CLASSES:
         return { ...state, classes: action.payload, fetchingEvents: false };
+    case FETCHING_SESSION:
+        return { ...state, fetchingSession: true };
+    case FETCHED_SESSION:
+        return { ...state, session: action.payload, fetchingSession: false };
     case CREATING_EVENT:
         return { ...state, creatingEvent: true };
     case CREATED_EVENT:
