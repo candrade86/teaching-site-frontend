@@ -12,4 +12,8 @@ export const ClassWrap = styled.div`
     justify-content: flex-start;
     padding: 3% 0 3% 1%;
     border-top: solid white;
+
+    &:hover {
+        cursor: pointer;
+    }
 `
