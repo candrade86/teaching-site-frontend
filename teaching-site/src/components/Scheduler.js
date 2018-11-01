@@ -14,6 +14,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import {
     Container,
     Header,
+    Instructions,
     Body,
 } from '../styled-components/Scheduler';
 
@@ -135,7 +136,6 @@ class Scheduler extends Component {
         }
       }       
     
-
       removeEvent(event) {
         const token = localStorage.getItem("token");
         let fbToken = localStorage.getItem("fbToken");
@@ -255,6 +255,9 @@ class Scheduler extends Component {
       <Container>
         {spinner}
         <Header />
+        <Instructions>
+          click to add a class or click twice on event to delete.
+        </Instructions>
         <Body>
           <DragAndDropCalendar
             selectable
@@ -268,7 +271,7 @@ class Scheduler extends Component {
             eventPropGetter={event => this.eventStyleGetter(event)}
             defaultView={Calendar.Views.WEEK}
             defaultDate={new Date()}
-            style={{ fontSize: '2rem', height: '90vh', width: '100%', background: 'white' }}
+            style={{ fontSize: '2rem', height: '79vh', width: '100%', background: 'white' }}
             views={{ week: true, day: true }}            
           />
         </Body>

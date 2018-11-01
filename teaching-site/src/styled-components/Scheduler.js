@@ -7,21 +7,36 @@ export const Container = styled.div`
     align-items: center;
     width: 100%;
     min-height: 100vh;
+
+    border: solid pink;
 `
 
 export const Header = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    height: 10vh;
-
+    
+    min-height: 10vh;
     /* border: solid red; */
 `
+export const Instructions = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    min-height: 10vh ;
+
+    color: white;
+    font-size: 3rem;
+`
+
 export const Body = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    height: 90vh;
+    
+    height: auto;
 `
 
 export const Logout = styled.p`
