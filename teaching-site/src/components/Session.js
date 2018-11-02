@@ -3,23 +3,24 @@ import { connect } from 'react-redux';
 import { fetchSession } from '../actions';
 import { Top, Middle, Text } from '../styled-components/Session';
 
-let sessionData;
-
 class Session extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      details: this.props.session
+      details: this.props.session,
     }
+
+    
+
   }
 
   componentDidMount() {
-    this.props.fetchSession(this.props.match.params.id)
+      this.props.fetchSession(this.props.match.params.id)
   }
 
   render(){
     let monthText;
-
+    
     let year = this.state.details.start.slice(0,4).toString();
     let month = Math.abs(this.state.details.start.slice(4,7)).toString();
     let nDate = Math.abs(this.state.details.start.slice(7,10)).toString();
@@ -57,9 +58,10 @@ class Session extends Component{
         break;
         case '12': monthText = 'December';
         break;
-    }
+      }
     return (
       <div>
+        {console.log('testing', this.state.start)}
         <Top />
         <Middle>
           <Text style={{fontSize: '2.7rem', textDecoration: 'underline', fontWeight: '900'}}>English Conversation Practice</Text>

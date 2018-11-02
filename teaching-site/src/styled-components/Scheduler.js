@@ -8,7 +8,7 @@ export const Container = styled.div`
     width: 100%;
     min-height: 100vh;
 
-    border: solid pink;
+    /* border: solid pink; */
 `
 
 export const Header = styled.div`
