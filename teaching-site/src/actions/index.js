@@ -15,8 +15,6 @@ import {
     ERROR,
     UPDATING_EVENT,
     UPDATED_EVENT,
-    FETCHING_SESSION,
-    FETCHED_SESSION
 } from './types';
 
 import jwt_decode from "jwt-decode";
@@ -82,19 +80,6 @@ export const fetchEvents = () => dispatch => {
         })
         .catch(err => {
             dispatch({ type: ERROR, errorMessage: 'Error fetching events', err })
-        })
-}
-
-export const fetchSession = id => dispatch => {
-    dispatch({ type: FETCHING_SESSION })
-
-    axios
-        .get (`/api/event/session/${id}`)
-        .then(response => {
-            dispatch({ type: FETCHED_SESSION, payload: response.data })
-        })
-        .catch(err => {
-            dispatch({ type: ERROR, errorMessage: 'Error fetching session', err })
         })
 }
 

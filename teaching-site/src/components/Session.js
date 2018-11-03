@@ -1,38 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSession } from '../actions';
 import { Top, Middle, Text } from '../styled-components/Session';
+
+let API_URL = process.env.NODE_ENV === 'production'
+?  process.env.REACT_APP_API_URL_PROD
+: process.env.REACT_APP_API_URL_DEV;
 
 class Session extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      details: this.props.session,
+      day: '',
+      start: '',
+      end: '',
     }
-
-    
-
+   
   }
 
   componentDidMount() {
-      this.props.fetchSession(this.props.match.params.id)
+    fetch(`${API_URL}/api/event/session/${this.props.match.params.id}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.setState({
+        day: data.day,
+        start: data.start,
+        end: data.end
+      })
+    })
   }
 
   render(){
     let monthText;
     
-    let year = this.state.details.start.slice(0,4).toString();
-    let month = Math.abs(this.state.details.start.slice(4,7)).toString();
-    let nDate = Math.abs(this.state.details.start.slice(7,10)).toString();
-    let startTime = new Date(this.state.details.start);
-    let endTime = new Date(this.state.details.end);
+    let year = this.state.start.slice(0,4).toString();
+    let month = Math.abs(this.state.start.slice(4,7)).toString();
+    let nDate = Math.abs(this.state.start.slice(7,10)).toString();
+    let startTime = new Date(this.state.start);
+    let endTime = new Date(this.state.end);
 
     let startMinutes = (startTime.getMinutes() != 0 ) ? startTime.getUTCMinutes() : startTime.getUTCMinutes() + '0';
     let endMinutes = (endTime.getMinutes() != 0 ) ? endTime.getUTCMinutes() : startTime.getUTCMinutes() + '0';
 
     let startingAt = `${startTime.getUTCHours()}:${startMinutes} UTC`;
     let endingAt = `${endTime.getUTCHours()}:${endMinutes} UTC`;  
-    console.log('year', year)
+    
     switch(month) {
         case '1': monthText = 'January';
         break;
@@ -61,11 +73,10 @@ class Session extends Component{
       }
     return (
       <div>
-        {console.log('testing', this.state.start)}
         <Top />
         <Middle>
           <Text style={{fontSize: '2.7rem', textDecoration: 'underline', fontWeight: '900'}}>English Conversation Practice</Text>
-          <Text>{`${this.props.session.day} ${monthText} ${nDate} ${year}`}</Text>
+          <Text>{`${this.state.day} ${monthText} ${nDate} ${year}`}</Text>
           <Text>{`Lesson Time ${startingAt}-${endingAt}`}</Text>
           <Text>Time Duration: 60 minutes</Text>
         </Middle>
@@ -74,10 +85,4 @@ class Session extends Component{
   }
 }
 
-function mapStateToProps(state) {
-  return {
-      session: state.event.session
-  };
-}
-
-export default connect(mapStateToProps, { fetchSession })(Session);
+export default Session;
