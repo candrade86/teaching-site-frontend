@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Top, Middle, Text } from '../styled-components/Session';
+
+import { Container, Top, Middle, Text } from '../styled-components/Session';
 
 let API_URL = process.env.NODE_ENV === 'production'
 ?  process.env.REACT_APP_API_URL_PROD
@@ -72,7 +72,7 @@ class Session extends Component{
         break;
       }
     return (
-      <div>
+      <Container>
         <Top />
         <Middle>
           <Text style={{fontSize: '2.7rem', textDecoration: 'underline', fontWeight: '900'}}>English Conversation Practice</Text>
@@ -80,7 +80,7 @@ class Session extends Component{
           <Text>{`Lesson Time ${startingAt}-${endingAt}`}</Text>
           <Text>Time Duration: 60 minutes</Text>
         </Middle>
-      </div>
+      </Container>
     )
   }
 }
