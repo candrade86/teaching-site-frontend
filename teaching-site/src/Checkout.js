@@ -26,11 +26,12 @@ const onToken = (amount, description) => token =>
     .then(successPayment)
     .catch(errorPayment);
 
-const Checkout = ({ name, description, amount }) =>
+const Checkout = ({ name, description, amount }) => 
+
   <StripeCheckout
     name={name}
     description={description}
-    amount={9000}
+    amount={amount}
     token={onToken(amount, description)}
     currency={CURRENCY}
     stripeKey={STRIPE_PUBLISHABLE}

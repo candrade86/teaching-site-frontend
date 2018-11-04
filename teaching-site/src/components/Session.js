@@ -21,7 +21,6 @@ class Session extends Component{
     fetch(`${API_URL}/api/event/session/${this.props.match.params.id}`)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
       this.setState({
         day: data.day,
         start: data.start,

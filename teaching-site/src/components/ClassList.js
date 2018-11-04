@@ -18,7 +18,7 @@ const ClassList = props => {
 
         let startingAt = `${startTime.getUTCHours()}:${startMinutes} UTC`;
         let endingAt = `${endTime.getUTCHours()}:${endMinutes} UTC`;  
-        console.log('year', year)
+        
         switch(month) {
             case '1': monthText = 'Jan';
             break;

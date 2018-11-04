@@ -84,6 +84,7 @@ export const Top1 = styled.div`
 `
 export const Top2 = styled.div`
     display: flex;
+    flex-direction: column;
     flex: 6;
 `
 

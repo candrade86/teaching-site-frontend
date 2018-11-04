@@ -21,6 +21,17 @@ const CLIENT = {
   };
 
 class Billing extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      price: 2000
+    }
+  }
+
+  handleOptionChange(e) {
+    this.setState({ price: e.target.value })
+  }
   render() {
 
     //paypal
@@ -46,7 +57,22 @@ class Billing extends Component {
               <Title>Conversational English</Title>
             </Top1>
             <Top2>
-              <Price>$90</Price>
+              <Price>$90
+                <input
+                  type='radio'
+                  name='price'
+                  value={9000}
+                  onChange={(e)=> this.handleOptionChange(e)}
+                />
+              </Price>
+              <Price>$20
+                <input
+                  type='radio'
+                  name='price'
+                  value={2000}
+                  onChange={(e)=> this.handleOptionChange(e)}
+                />
+              </Price>
             </Top2>
           </Top>
           <Bot>
@@ -55,7 +81,7 @@ class Billing extends Component {
               env={ENV}
               commit={true}
               currency={'USD'}
-              total={90}
+              total={this.state.price}
               onSuccess={onSuccess}
               onError={onError}
               onCancel={onCancel}
@@ -63,7 +89,8 @@ class Billing extends Component {
             <Checkout
                 name={'Conversational English'}
                 description={'kamehameha!!!'}
-                amount={1}
+                amount={parseInt(this.state.price)}
+                
             />
           </Bot>
         </Pronunciation>
@@ -73,7 +100,22 @@ class Billing extends Component {
               <Title>American English Pronunciation</Title>
             </Top1>
             <Top2>
-              <Price>$90</Price>
+              <Price>$90 
+                <input
+                  type='radio'
+                  name='price'
+                  value={9000}
+                  onChange={(e)=> this.handleOptionChange(e)}
+                />
+              </Price>
+              <Price>$20
+                <input 
+                  type='radio'
+                  name='price' 
+                  value={2000}
+                  onChange={(e)=> this.handleOptionChange(e)}
+                />
+              </Price>
             </Top2>
           </Top>
           <Bot>
@@ -82,7 +124,7 @@ class Billing extends Component {
               env={ENV}
               commit={true}
               currency={'USD'}
-              total={90}
+              total={this.state.price}
               onSuccess={onSuccess}
               onError={onError}
               onCancel={onCancel}
@@ -90,11 +132,13 @@ class Billing extends Component {
             <Checkout
                 name={'Conversational English'}
                 description={'kamehameha!!!'}
-                amount={1}
+                amount={parseInt(this.state.price)}
             />
           </Bot>
         </Conversation>
         </Body>
+
+        {console.log('the price is right', this.state.price)}
       </Container>
     )
   }

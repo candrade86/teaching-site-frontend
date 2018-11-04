@@ -59,7 +59,6 @@ class Student extends Component {
 
     return (
       <Container>
-        {console.log(this.props.classes)}
         <Top />
         <Middle>
           <Schedule
