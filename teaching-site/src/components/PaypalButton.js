@@ -85,6 +85,7 @@ class PaypalButton extends Component {
         };
 
         onSuccess(payment);
+        console.log('payment successful')
       });
 
     return (

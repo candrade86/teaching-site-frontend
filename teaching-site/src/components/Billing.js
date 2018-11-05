@@ -124,7 +124,7 @@ class Billing extends Component {
               env={ENV}
               commit={true}
               currency={'USD'}
-              total={this.state.price}
+              total={this.state.price / 100}
               onSuccess={onSuccess}
               onError={onError}
               onCancel={onCancel}
