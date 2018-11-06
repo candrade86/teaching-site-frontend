@@ -25,12 +25,16 @@ class Billing extends Component {
     super(props);
 
     this.state = {
-      price: 2000
+      price: 2000,
+      packageType: ''
     }
   }
 
-  handleOptionChange(e) {
-    this.setState({ price: e.target.value })
+  handleOptionChange(e, type) {
+    this.setState({ 
+      price: e.target.value,
+      packageType: type 
+    })
   }
   render() {
 
@@ -62,7 +66,7 @@ class Billing extends Component {
                   type='radio'
                   name='price'
                   value={9000}
-                  onChange={(e)=> this.handleOptionChange(e)}
+                  onChange={(e)=> this.handleOptionChange(e, 'conversation')}
                 />
               </Price>
               <Price>$20
@@ -70,7 +74,7 @@ class Billing extends Component {
                   type='radio'
                   name='price'
                   value={2000}
-                  onChange={(e)=> this.handleOptionChange(e)}
+                  onChange={(e)=> this.handleOptionChange(e, 'conversation')}
                 />
               </Price>
             </Top2>
@@ -105,7 +109,7 @@ class Billing extends Component {
                   type='radio'
                   name='price'
                   value={9000}
-                  onChange={(e)=> this.handleOptionChange(e)}
+                  onChange={(e)=> this.handleOptionChange(e, 'pronunciation')}
                 />
               </Price>
               <Price>$20
@@ -113,7 +117,7 @@ class Billing extends Component {
                   type='radio'
                   name='price' 
                   value={2000}
-                  onChange={(e)=> this.handleOptionChange(e)}
+                  onChange={(e)=> this.handleOptionChange(e, 'pronunciation')}
                 />
               </Price>
             </Top2>
@@ -139,6 +143,7 @@ class Billing extends Component {
         </Body>
 
         {console.log('the price is right', this.state.price)}
+        {console.log('the price is right', this.state.packageType)}
       </Container>
     )
   }
