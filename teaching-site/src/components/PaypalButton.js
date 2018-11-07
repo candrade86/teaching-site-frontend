@@ -54,6 +54,7 @@ class PaypalButton extends Component {
       onSuccess,
       onError,
       onCancel,
+      packageType
     } = this.props;
 
     const {
@@ -85,7 +86,7 @@ class PaypalButton extends Component {
         };
 
         onSuccess(payment);
-        console.log('payment successful')
+        console.log('payment successful', packageType)
       });
 
     return (

@@ -15,24 +15,26 @@ const errorPayment = data => {
   alert('Payment Error');
 };
 
-const onToken = (amount, description) => token =>
+const onToken = (amount, description, packageType) => token =>
   axios.post(PAYMENT_SERVER_URL,
     {
       description,
       source: token.id,
       currency: CURRENCY,
-      amount: 9000
+      amount
     })
     .then(successPayment)
+    .then(console.log('insideToken', packageType))
     .catch(errorPayment);
 
-const Checkout = ({ name, description, amount }) => 
+const Checkout = ({ name, description, amount, packageType }) => 
 
   <StripeCheckout
     name={name}
     description={description}
     amount={amount}
-    token={onToken(amount, description)}
+    packageType={packageType}
+    token={onToken(amount, description, packageType)}
     currency={CURRENCY}
     stripeKey={STRIPE_PUBLISHABLE}
   />

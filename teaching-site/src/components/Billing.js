@@ -89,11 +89,13 @@ class Billing extends Component {
               onSuccess={onSuccess}
               onError={onError}
               onCancel={onCancel}
+              packageType={this.state.packageType}
             />
             <Checkout
                 name={'Conversational English'}
-                description={'kamehameha!!!'}
+                description={this.state.packageType}
                 amount={parseInt(this.state.price)}
+                packageType={this.state.packageType}
                 
             />
           </Bot>
