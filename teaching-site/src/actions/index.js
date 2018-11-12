@@ -15,6 +15,8 @@ import {
     ERROR,
     UPDATING_EVENT,
     UPDATED_EVENT,
+    UPDATING_USER,
+    UPDATED_USER,
 } from './types';
 
 import jwt_decode from "jwt-decode";
@@ -70,11 +72,25 @@ export const signOut = (callback) => {
     };
   };
 
+export const updateUser = () => dispatch => {
+    dispatch({ type: UPDATING_USER })
+
+    axios
+    
+        .put('api/user/update')
+        .then(response => {
+            dispatch({ type: UPDATED_USER, payload: response.data })
+        })
+        .catch(err => {
+            dispatch({ type: ERROR, errorMessage: 'Error updating user', err })
+        })
+}
+
 export const fetchEvents = () => dispatch => {
     dispatch({ type: FETCHING_EVENTS })
 
     axios
-        .get ("/api/event")
+        .get ('/api/event')
         .then(response => {
             dispatch({ type: FETCHED_EVENTS, payload: response.data })
         })
