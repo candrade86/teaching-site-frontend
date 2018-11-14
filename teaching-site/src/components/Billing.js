@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateUser } from '../actions';
+
 import PayPal from './PaypalButton';
 import { 
   Container,
@@ -96,6 +99,7 @@ class Billing extends Component {
                 description={this.state.packageType}
                 amount={parseInt(this.state.price)}
                 packageType={this.state.packageType}
+                update={this.props.updateUser}
                 
             />
           </Bot>
@@ -139,6 +143,7 @@ class Billing extends Component {
                 name={'Conversational English'}
                 description={'kamehameha!!!'}
                 amount={parseInt(this.state.price)}
+                update={this.props.updateUser}
             />
           </Bot>
         </Conversation>
@@ -151,4 +156,4 @@ class Billing extends Component {
   }
 }
 
-export default Billing;
+export default connect(null, {updateUser})(Billing);
