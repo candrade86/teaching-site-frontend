@@ -88,11 +88,12 @@ class Billing extends Component {
               env={ENV}
               commit={true}
               currency={'USD'}
-              total={this.state.price}
+              total={this.state.price / 100}
               onSuccess={onSuccess}
               onError={onError}
               onCancel={onCancel}
               packageType={this.state.packageType}
+              update={this.props.updateUser}
             />
             <Checkout
                 name={'Conversational English'}
@@ -138,9 +139,10 @@ class Billing extends Component {
               onSuccess={onSuccess}
               onError={onError}
               onCancel={onCancel}
+              update={this.props.updateUser}
             />
             <Checkout
-                name={'Conversational English'}
+                name={'American English Pronunciation'}
                 description={'kamehameha!!!'}
                 amount={parseInt(this.state.price)}
                 update={this.props.updateUser}

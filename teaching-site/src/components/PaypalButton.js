@@ -54,7 +54,7 @@ class PaypalButton extends Component {
       onSuccess,
       onError,
       onCancel,
-      packageType
+      packageType,
     } = this.props;
 
     const {
@@ -74,6 +74,7 @@ class PaypalButton extends Component {
     });
 
   const onAuthorize = (data, actions) =>
+    
     actions.payment.execute()
       .then(() => {
         const payment = {
@@ -86,7 +87,7 @@ class PaypalButton extends Component {
         };
 
         onSuccess(payment);
-        console.log('payment successful', packageType)
+        console.log('props.update', this.props.update)
       });
 
     return (
