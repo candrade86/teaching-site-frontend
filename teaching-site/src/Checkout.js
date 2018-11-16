@@ -18,6 +18,21 @@ const errorPayment = data => {
   alert('Payment Error');
 };
 
+let id;
+  
+if (localStorage.getItem('token')){ 
+  let token = localStorage.getItem("token");   
+  const decoded = jwt_decode(token);
+  id = decoded.id;
+}
+
+
+if(localStorage.getItem('fbToken')){
+  let token = JSON.parse(localStorage.getItem('fbToken'))
+  id = token.id;
+
+}
+
 const onToken = (amount, description, packageType, update) => token =>
   axios.post(PAYMENT_SERVER_URL,
     {
@@ -27,7 +42,7 @@ const onToken = (amount, description, packageType, update) => token =>
       amount
     })
     .then(successPayment)
-    .then(console.log('insideToken', update))// pass packageType into updateUser
+    .then(update({ packageType, id }))// pass packageType into updateUser
     .catch(errorPayment);
 
 const Checkout = ({ name, description, amount, packageType, update }) => 

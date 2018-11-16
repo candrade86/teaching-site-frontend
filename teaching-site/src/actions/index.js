@@ -72,12 +72,11 @@ export const signOut = (callback) => {
     };
   };
 
-export const updateUser = () => dispatch => {
+export const updateUser = update => dispatch => {
     dispatch({ type: UPDATING_USER })
 
     axios
-    
-        .put('api/user/update')
+        .put('api/user/update', { id: update.id, type: update.packageType })
         .then(response => {
             dispatch({ type: UPDATED_USER, payload: response.data })
         })
