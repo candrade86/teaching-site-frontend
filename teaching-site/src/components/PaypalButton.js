@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import scriptLoader from 'react-async-script-loader';
 
+import jwt_decode from 'jwt-decode';
+
 class PaypalButton extends Component {
   constructor(props) {
     super(props);
@@ -73,8 +75,23 @@ class PaypalButton extends Component {
       ],
     });
 
-  const onAuthorize = (data, actions) =>
+    let id;
+  
+    if (localStorage.getItem('token')){ 
+      let token = localStorage.getItem("token");   
+      const decoded = jwt_decode(token);
+      id = decoded.id;
+    }
     
+    
+    if (localStorage.getItem('fbToken')){
+      let token = JSON.parse(localStorage.getItem('fbToken'))
+      id = token.id;
+    
+    }
+
+  const onAuthorize = (data, actions) => 
+  
     actions.payment.execute()
       .then(() => {
         const payment = {
@@ -87,9 +104,11 @@ class PaypalButton extends Component {
         };
 
         onSuccess(payment);
-        console.log('props.update', this.props.update)
-      });
-
+        
+        let packageType = this.props.packageType;    
+      }, this.props.update({ id, packageType, total }));
+      
+    
     return (
       <div>
         {showButton && <paypal.Button.react

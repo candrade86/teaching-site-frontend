@@ -140,6 +140,7 @@ class Billing extends Component {
               onError={onError}
               onCancel={onCancel}
               update={this.props.updateUser}
+              packageType={this.state.packageType}
             />
             <Checkout
                 name={'American English Pronunciation'}

@@ -74,9 +74,9 @@ export const signOut = (callback) => {
 
 export const updateUser = update => dispatch => {
     dispatch({ type: UPDATING_USER })
-
+    console.log('action', update)
     axios
-        .put('api/user/update', { id: update.id, type: update.packageType })
+        .put('api/user/update', { id: update.id, type: update.packageType, total: update.total })
         .then(response => {
             dispatch({ type: UPDATED_USER, payload: response.data })
         })

@@ -42,7 +42,7 @@ const onToken = (amount, description, packageType, update) => token =>
       amount
     })
     .then(successPayment)
-    .then(update({ packageType, id }))// pass packageType into updateUser
+    .then(update({ packageType, id, total: amount / 100 }))// pass packageType into updateUser
     .catch(errorPayment);
 
 const Checkout = ({ name, description, amount, packageType, update }) => 
