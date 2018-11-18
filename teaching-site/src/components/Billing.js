@@ -147,6 +147,7 @@ class Billing extends Component {
                 description={'kamehameha!!!'}
                 amount={parseInt(this.state.price)}
                 update={this.props.updateUser}
+                packageType={this.state.packageType}
             />
           </Bot>
         </Conversation>
