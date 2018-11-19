@@ -6,8 +6,6 @@ import StripeCheckout from 'react-stripe-checkout';
 import STRIPE_PUBLISHABLE from './constants/stripe';
 import PAYMENT_SERVER_URL from './constants/server';
 
-import jwt_decode from 'jwt-decode';
-
 const CURRENCY = 'USD';
 
 const successPayment = data => {
@@ -18,22 +16,9 @@ const errorPayment = data => {
   alert('Payment Error');
 };
 
-let id;
-  
-if (localStorage.getItem('token')){ 
-  let token = localStorage.getItem("token");   
-  const decoded = jwt_decode(token);
-  id = decoded.id;
-}
 
 
-if(localStorage.getItem('fbToken')){
-  let token = JSON.parse(localStorage.getItem('fbToken'))
-  id = token.id;
-
-}
-
-const onToken = (amount, description, packageType, update) => token =>
+const onToken = (amount, description, packageType, update, id) => token =>
   axios.post(PAYMENT_SERVER_URL,
     {
       description,
@@ -45,14 +30,14 @@ const onToken = (amount, description, packageType, update) => token =>
     .then(update({ packageType, id, total: amount / 100 }))// pass packageType into updateUser
     .catch(errorPayment);
 
-const Checkout = ({ name, description, amount, packageType, update }) => 
+const Checkout = ({ name, description, amount, packageType, update, userId }) => 
    
   <StripeCheckout
     name={name}
     description={description}
     amount={amount}
     packageType={packageType}
-    token={onToken(amount, description, packageType, update)}
+    token={onToken(amount, description, packageType, update, userId)}
     currency={CURRENCY}
     stripeKey={STRIPE_PUBLISHABLE}
   />

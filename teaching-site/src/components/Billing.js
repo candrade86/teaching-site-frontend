@@ -18,10 +18,15 @@ import {
 } from '../styled-components/Billing';
 import Checkout from '../Checkout';
 
+import jwt_decode from 'jwt-decode';
+
 const CLIENT = {
     sandbox: process.env.REACT_APP_PAYPAL_CLIENT_ID_SANDBOX,
     production: process.env.REACT_APP_PAYPAL_CLIENT_ID_PRODUCTION
   };
+
+
+
 
 class Billing extends Component {
   constructor(props){
@@ -29,14 +34,34 @@ class Billing extends Component {
 
     this.state = {
       price: 2000,
-      packageType: ''
+      packageType: '',
+      id: 'empty'
+    }
+  }
+
+  componentDidMount() {
+    let id;
+  
+    if (localStorage.getItem('token')){ 
+      let token = localStorage.getItem("token");   
+      const decoded = jwt_decode(token);
+      console.log(decoded.sub)
+      id = decoded.sub;
+      this.setState({ id: id })
+    }
+
+
+    if(localStorage.getItem('fbToken')){
+      let token = JSON.parse(localStorage.getItem('fbToken'))
+      id = token.sub;
+      this.setState({ id })
     }
   }
 
   handleOptionChange(e, type) {
     this.setState({ 
       price: e.target.value,
-      packageType: type 
+      packageType: type,
     })
   }
   render() {
@@ -94,6 +119,7 @@ class Billing extends Component {
               onCancel={onCancel}
               packageType={this.state.packageType}
               update={this.props.updateUser}
+              userId={this.state.id}
             />
             <Checkout
                 name={'Conversational English'}
@@ -101,6 +127,7 @@ class Billing extends Component {
                 amount={parseInt(this.state.price)}
                 packageType={this.state.packageType}
                 update={this.props.updateUser}
+                userId={this.state.id}
                 
             />
           </Bot>
@@ -141,6 +168,7 @@ class Billing extends Component {
               onCancel={onCancel}
               update={this.props.updateUser}
               packageType={this.state.packageType}
+              userId={this.state.id}
             />
             <Checkout
                 name={'American English Pronunciation'}
@@ -148,13 +176,12 @@ class Billing extends Component {
                 amount={parseInt(this.state.price)}
                 update={this.props.updateUser}
                 packageType={this.state.packageType}
+                userId={this.state.id}
             />
           </Bot>
         </Conversation>
         </Body>
 
-        {console.log('the price is right', this.state.price)}
-        {console.log('the price is right', this.state.packageType)}
       </Container>
     )
   }
