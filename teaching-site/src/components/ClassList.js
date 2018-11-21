@@ -1,7 +1,6 @@
 import React from 'react'
 import { Fragment } from 'react';
 import { withRouter } from 'react-router';
-
 import { ClassesWrap, ClassWrap } from '../styled-components/ClassList';
 
 const ClassList = props => {

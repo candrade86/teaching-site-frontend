@@ -4,6 +4,8 @@ import {
     SIGNING_UP,
     SIGNING_IN,
     AUTH_USER,
+    FETCHING_USER,
+    FETCHED_USER,
     FETCHING_EVENTS,
     FETCHED_EVENTS,
     FETCHING_CLASSES,
@@ -72,16 +74,29 @@ export const signOut = (callback) => {
     };
   };
 
+export const fetchUser = id => dispatch => {
+    dispatch({ FETCHING_USER })
+
+    axios
+        .get('api/user/', { id })
+        .then(response => {
+            dispatch({ type: FETCHED_USER, payload: response.data })
+        })
+        .catch(err => {
+            dispatch({ type: ERROR, errorMessage: 'Error fetching USER'})
+        })
+}
+
 export const updateUser = update => dispatch => {
     dispatch({ type: UPDATING_USER })
-    console.log('action', update)
+    
     axios
         .put('api/user/update', { id: update.id, type: update.packageType, total: update.total })
         .then(response => {
             dispatch({ type: UPDATED_USER, payload: response.data })
         })
         .catch(err => {
-            dispatch({ type: ERROR, errorMessage: 'Error updating user', err })
+            dispatch({ type: ERROR, errorMessage: 'Error updating USER', err })
         })
 }
 

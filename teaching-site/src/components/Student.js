@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import requireAuth from '../hoc/requireAuth';
 import { fetchClasses } from '../actions';
-
 import ClassList from './ClassList';
-
 import jwt_decode from 'jwt-decode';
+
 
 import {  
   Container,

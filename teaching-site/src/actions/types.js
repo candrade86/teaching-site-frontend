@@ -2,6 +2,8 @@ export const AUTH_USER = 'auth_user';
 export const SIGNING_UP = 'signing_up';
 export const SIGNING_IN = 'signing_in';
 
+export const FETCHING_USER = 'fetching_user';
+export const FETCHED_USER = 'fetched_user';
 export const UPDATING_USER = 'updating_user';
 export const UPDATED_USER = 'updated_user';
 
