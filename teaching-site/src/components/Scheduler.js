@@ -28,12 +28,13 @@ let API_URL = process.env.NODE_ENV === 'production'
 : process.env.REACT_APP_API_URL_DEV;
 
 
+let newEvents= [];
 
 class Scheduler extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          events: this.props.events,
+          events: newEvents,
           day: ''
         }
     
@@ -45,7 +46,7 @@ class Scheduler extends Component {
         fetch(`${API_URL}/api/event`)
           .then(response => response.json())
           .then(data => {
-            let newEvents = data.map((e)=> {
+             newEvents = data.map((e)=> {
               return {
                 _id: e._id, 
                 title: e.title,  
@@ -53,10 +54,11 @@ class Scheduler extends Component {
                 start: new Date(e.start)
               }
           })
-          if(this._ismounted = true){
+           if(this._ismounted = true){
             this.setState({ events: newEvents });
-          }
+           }
         })
+        
       }
 
       componentDidUpdate(prevProps, prevState) {
@@ -282,7 +284,6 @@ class Scheduler extends Component {
 
 function mapStateToProps(state) {
   return {
-      events: state.event.events,
       deletingEvent: state.event.deletingEvent,
       fetchingEvents: state.event.fetchingEvents,
       creatingEvent: state.event.creatingEvent,
