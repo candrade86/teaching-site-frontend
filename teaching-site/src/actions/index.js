@@ -74,13 +74,14 @@ export const signOut = (callback) => {
     };
   };
 
-export const fetchUser = id => dispatch => {
-    dispatch({ FETCHING_USER })
-
+export const fetchUser = (id, callback) => dispatch => {
+    dispatch({ type: FETCHING_USER })
+    console.log('actionId', id)
     axios
-        .get('api/user/', { id })
+        .post('api/user/', { id })
         .then(response => {
             dispatch({ type: FETCHED_USER, payload: response.data })
+            callback();
         })
         .catch(err => {
             dispatch({ type: ERROR, errorMessage: 'Error fetching USER'})

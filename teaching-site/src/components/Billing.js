@@ -45,7 +45,7 @@ class Billing extends Component {
     if (localStorage.getItem('token')){ 
       let token = localStorage.getItem("token");   
       const decoded = jwt_decode(token);
-      console.log(decoded.sub)
+      
       id = decoded.sub;
       this.setState({ id: id })
     }

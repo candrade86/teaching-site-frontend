@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createEvent, deleteEvent, updateEvent } from '../actions';
+import { createEvent, deleteEvent, updateEvent, fetchUser } from '../actions';
 import requireAuth from '../hoc/requireAuth';
 import Spinner from './UI/Spinner';
 
@@ -34,6 +34,7 @@ class Scheduler extends Component {
     constructor(props) {
         super(props)
         this.state = {
+          user: '',
           events: newEvents,
           day: ''
         }
@@ -43,6 +44,27 @@ class Scheduler extends Component {
       }
     
       componentDidMount() {
+        let id;
+  
+        if (localStorage.getItem('token')){ 
+          let token = localStorage.getItem("token");   
+          const decoded = jwt_decode(token);
+          
+          id = decoded.sub;
+          // this.setState({ id: id })
+        }
+
+
+        if(localStorage.getItem('fbToken')){
+          let token = JSON.parse(localStorage.getItem('fbToken'))
+          id = token.sub;
+          // this.setState({ id })
+        }
+
+        this.props.fetchUser(id, ()=> {
+          this.setState({user: this.props.currentUser})
+        })
+          
         fetch(`${API_URL}/api/event`)
           .then(response => response.json())
           .then(data => {
@@ -255,6 +277,7 @@ class Scheduler extends Component {
 
     return (
       <Container>
+        {console.log('currentUser', this.state.user)}
         {spinner}
         <Header />
         <Instructions>
@@ -284,6 +307,7 @@ class Scheduler extends Component {
 
 function mapStateToProps(state) {
   return {
+      currentUser: state.user.user,
       deletingEvent: state.event.deletingEvent,
       fetchingEvents: state.event.fetchingEvents,
       creatingEvent: state.event.creatingEvent,
@@ -291,4 +315,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent })(requireAuth(Scheduler));
+export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent, fetchUser })(requireAuth(Scheduler));
