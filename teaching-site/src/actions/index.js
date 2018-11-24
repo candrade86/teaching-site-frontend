@@ -76,7 +76,7 @@ export const signOut = (callback) => {
 
 export const fetchUser = (id, callback) => dispatch => {
     dispatch({ type: FETCHING_USER })
-    console.log('actionId', id)
+    
     axios
         .post('api/user/', { id })
         .then(response => {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createEvent, deleteEvent, updateEvent, fetchUser } from '../actions';
+import AlertBox from './UI/AlertBox';
 import requireAuth from '../hoc/requireAuth';
 import Spinner from './UI/Spinner';
 
@@ -278,6 +279,7 @@ class Scheduler extends Component {
     return (
       <Container>
         {console.log('currentUser', this.state.user)}
+        <AlertBox />
         {spinner}
         <Header />
         <Instructions>
