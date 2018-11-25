@@ -48,3 +48,15 @@ export const Logout = styled.p`
         cursor: pointer;
     }
 `
+
+export const AlertWrapper = styled.div`
+  position: absolute;
+  z-index: 1;
+  /* top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px; */
+  min-height: 100vh;
+  min-width: 100vw;
+  /* text-align: center; */
+`

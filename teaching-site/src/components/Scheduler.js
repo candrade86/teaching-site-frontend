@@ -17,6 +17,7 @@ import {
     Header,
     Instructions,
     Body,
+    AlertWrapper
 } from '../styled-components/Scheduler';
 
 import jwt_decode from 'jwt-decode';
@@ -28,13 +29,15 @@ let API_URL = process.env.NODE_ENV === 'production'
 ?  process.env.REACT_APP_API_URL_PROD
 : process.env.REACT_APP_API_URL_DEV;
 
-
 let newEvents= [];
+
+let disp = 'none'; 
 
 class Scheduler extends Component {
     constructor(props) {
         super(props)
         this.state = {
+          alert: false,
           user: '',
           events: newEvents,
           day: ''
@@ -49,17 +52,13 @@ class Scheduler extends Component {
   
         if (localStorage.getItem('token')){ 
           let token = localStorage.getItem("token");   
-          const decoded = jwt_decode(token);
-          
+          const decoded = jwt_decode(token);  
           id = decoded.sub;
-          // this.setState({ id: id })
         }
-
 
         if(localStorage.getItem('fbToken')){
           let token = JSON.parse(localStorage.getItem('fbToken'))
           id = token.sub;
-          // this.setState({ id })
         }
 
         this.props.fetchUser(id, ()=> {
@@ -120,8 +119,14 @@ class Scheduler extends Component {
        
           
       }
- 
+      
       handleSelect = ({ start, end }) => {
+        
+          if(this.props.currentUser.classType.conversation > 0 && this.props.currentUser.classType.pronunciation > 0) {
+            disp = 'block';
+            
+          } 
+      
         const token = localStorage.getItem("token");
         let fbToken = localStorage.getItem("fbToken");
         let username;
@@ -135,7 +140,6 @@ class Scheduler extends Component {
           let fbToken = JSON.parse(localStorage.getItem('fbToken'))
           username = `${fbToken.username} #${fbToken.id}`;
         }
-
       
         let day = this.dayOfWeek(start)
         
@@ -154,11 +158,14 @@ class Scheduler extends Component {
               end,
               day  
           }
-
-          this.props.createEvent(eventProps)
+         
+              this.props.createEvent(eventProps)
+             
           }
         }
         }
+
+    
       }       
     
       removeEvent(event) {
@@ -275,11 +282,15 @@ class Scheduler extends Component {
     if (this.props.fetchingEvents === true || this.props.creatingEvent === true || this.props.deletingEvent === true || this.props.updatingEvent === true ) {
         spinner = <Spinner />;
       }
-
+     
     return (
       <Container>
-        {console.log('currentUser', this.state.user)}
-        <AlertBox />
+        {console.log('currentUser', this.props.currentUser)}
+
+        <AlertWrapper style={{display: `${disp}`}}>
+          <AlertBox />
+        </AlertWrapper>
+
         {spinner}
         <Header />
         <Instructions>

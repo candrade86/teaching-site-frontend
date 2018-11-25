@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  width: 20%;
-  height: auto;
   background-color: grey;
   position: absolute;
   z-index: 1;
@@ -11,9 +9,11 @@ const Container = styled.div`
   left: 50%;
   margin-left: -50px;
   margin-top: -50px;
-  height: 100px;
-  width: 100px;
+  min-height: auto;
+  min-width: 30%;
   text-align: center;
+
+  border: solid red;
 `
 
 export const AlertBoxContainer = (props) => {
@@ -23,3 +23,7 @@ export const AlertBoxContainer = (props) => {
         </Container>
     )
 }
+
+export const Button = styled.button`
+    background-color: yellow; 
+`
