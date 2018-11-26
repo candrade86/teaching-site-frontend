@@ -88,7 +88,7 @@ export const fetchUser = (id, callback) => dispatch => {
         })
 }
 
-export const updateUser = update => dispatch => {
+export const updateUser = (update) => dispatch => {
     dispatch({ type: UPDATING_USER })
     
     axios
@@ -126,7 +126,7 @@ export const fetchClasses = username => dispatch => {
         })
 }
 
-export const createEvent = (eventProps, callback) => dispatch =>  {
+export const createEvent = (eventProps) => dispatch =>  {
     dispatch({ type: CREATING_EVENT }); 
     
     axios
@@ -135,7 +135,7 @@ export const createEvent = (eventProps, callback) => dispatch =>  {
         )
         .then(response => {
             dispatch({ type: CREATED_EVENT, payload: response.data })
-            callback();
+    
         })
         .catch(err => {
             dispatch({ type: ERROR, errorMessage: 'Error creating event.', err })

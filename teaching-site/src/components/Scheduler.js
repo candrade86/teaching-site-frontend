@@ -29,6 +29,7 @@ let API_URL = process.env.NODE_ENV === 'production'
 ?  process.env.REACT_APP_API_URL_PROD
 : process.env.REACT_APP_API_URL_DEV;
 
+
 let newEvents= [];
 
 let disp = 'none'; 
@@ -285,8 +286,6 @@ class Scheduler extends Component {
      
     return (
       <Container>
-        {console.log('currentUser', this.props.currentUser)}
-
         <AlertWrapper style={{display: `${disp}`}}>
           <AlertBox />
         </AlertWrapper>

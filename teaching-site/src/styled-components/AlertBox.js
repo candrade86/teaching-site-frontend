@@ -18,7 +18,7 @@ const Container = styled.div`
 
 export const AlertBoxContainer = (props) => {
     return (
-        <Container>
+        <Container style={{ display: props.view}}>
             {props.children}
         </Container>
     )
