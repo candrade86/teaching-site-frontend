@@ -85,6 +85,26 @@ class Scheduler extends Component {
       }
 
       componentDidUpdate(prevProps, prevState) {
+        if(prevProps.currentUser.classType.conversation > this.props.currentUser.classType.conversation) {
+          disp = 'none'
+          
+          fetch(`${API_URL}/api/event`)
+          .then(response => response.json())
+          .then(data => {
+            let newEvents = data.map((e)=> {
+              return {
+                _id: e._id, 
+                title: e.title,  
+                end: new Date(e.end),
+                start: new Date(e.start)
+              }
+          })
+          if(this._ismounted = true){
+            this.setState({ events: newEvents });
+          }
+        })
+        }
+
         if (prevProps.events !== this.props.events) {
           fetch(`${API_URL}/api/event`)
           .then(response => response.json())
@@ -103,6 +123,16 @@ class Scheduler extends Component {
         })
        }
       }
+
+      // shouldComponentUpdate(nextProps, nextState) {
+      //   console.log('SCU', nextProps)
+      //   if(nextProps.currentUser.classType.conversation < this.props.currentUser.classType.conversation) {
+      //     disp = 'none'
+      //     this.setState({alert: !this.state.alert});
+          
+      //   }
+      //   return true
+      // }
 
       dayOfWeek(start){
       
@@ -286,6 +316,7 @@ class Scheduler extends Component {
      
     return (
       <Container>
+        {console.log('user', this.props.currentUser)}
         <AlertWrapper style={{display: `${disp}`}}>
           <AlertBox />
         </AlertWrapper>
