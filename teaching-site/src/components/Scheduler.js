@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createEvent, deleteEvent, updateEvent, fetchUser } from '../actions';
+import { createEvent, deleteEvent, updateEvent, fetchUser, updateUser } from '../actions';
 import AlertBox from './UI/AlertBox';
 import requireAuth from '../hoc/requireAuth';
 import Spinner from './UI/Spinner';
@@ -34,6 +34,8 @@ let newEvents= [];
 
 let disp = 'none'; 
 
+let id;
+
 class Scheduler extends Component {
     constructor(props) {
         super(props)
@@ -49,7 +51,7 @@ class Scheduler extends Component {
       }
     
       componentDidMount() {
-        let id;
+        // let id;
   
         if (localStorage.getItem('token')){ 
           let token = localStorage.getItem("token");   
@@ -124,16 +126,6 @@ class Scheduler extends Component {
        }
       }
 
-      // shouldComponentUpdate(nextProps, nextState) {
-      //   console.log('SCU', nextProps)
-      //   if(nextProps.currentUser.classType.conversation < this.props.currentUser.classType.conversation) {
-      //     disp = 'none'
-      //     this.setState({alert: !this.state.alert});
-          
-      //   }
-      //   return true
-      // }
-
       dayOfWeek(start){
       
         let d = new Date(start);
@@ -154,9 +146,20 @@ class Scheduler extends Component {
       handleSelect = ({ start, end }) => {
         
           if(this.props.currentUser.classType.conversation > 0 && this.props.currentUser.classType.pronunciation > 0) {
-            disp = 'block';
-            
+            disp = 'block';  
           } 
+
+          if(this.props.currentUser.classType.conversation === 0 && this.props.currentUser.classType.pronunciation === 0) {
+            disp = 'block';  
+          }
+
+          if(this.props.currentUser.classType.conversation > 0 && this.props.currentUser.classType.pronunciation === 0) {
+            this.props.updateUser({id: id, packageType: 'conversation', total: -1 })
+          }
+          
+          if(this.props.currentUser.classType.conversation === 0 && this.props.currentUser.classType.pronunciation > 0) {
+            this.props.updateUser({id: id, packageType: 'pronunciation', total: -1 })
+          }
       
         const token = localStorage.getItem("token");
         let fbToken = localStorage.getItem("fbToken");
@@ -191,7 +194,8 @@ class Scheduler extends Component {
           }
          
               this.props.createEvent(eventProps)
-             
+             // Need to get event to display on scheduler immediately after click if only one class
+             // type is available to the user. 
           }
         }
         }
@@ -358,4 +362,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent, fetchUser })(requireAuth(Scheduler));
+export default connect(mapStateToProps, { createEvent, deleteEvent, updateEvent, fetchUser, updateUser })(requireAuth(Scheduler));

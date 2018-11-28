@@ -20,6 +20,7 @@ class AlertBox extends Component {
       }
 
     componentDidMount(){
+
         if (localStorage.getItem('token')){ 
             let token = localStorage.getItem("token")   
             const decoded = jwt_decode(token)
@@ -42,16 +43,36 @@ class AlertBox extends Component {
         this.props.updateUser({id: this.state.id, packageType: `${type}`, total: -1 })
     }
 
+    
+
     render() {
+        let Alert;
+
+        if(this.props.currentUser.classType.conversation === 0 && this.props.currentUser.classType.pronunciation === 0){
+          Alert =  <h1 onClick={()=> this.props.history.push('/billing')} style={{fontSize: '4rem'}}> Purchase classes </h1>
+        } else {
+            Alert = (
+                <div> 
+                    <h1 style={{fontSize: '4rem'}}> Choose a class type: </h1>
+                    <Button onClick={()=> this.onClickButton('conversation')}> Conversation </Button>
+                    <Button onClick={()=> this.onClickButton('pronunciation')}> Pronunciation </Button>
+                 </div>
+                )
+        }
+
         return (
             <AlertBoxContainer>
-                <h1 style={{fontSize: '4rem'}}> Choose a class type: </h1>
-                <Button onClick={()=> this.onClickButton('conversation')}> Conversation </Button>
-                <Button onClick={()=> this.onClickButton('pronunciation')}> Pronunciation </Button>
-            </AlertBoxContainer>
+               {Alert}
+            </AlertBoxContainer> 
         )
     }
 
 }
 
-export default connect(null, {updateUser})(withRouter(AlertBox))
+function mapStateToProps(state) {
+    return {
+        currentUser: state.user.user,
+    };
+  }
+
+export default connect(mapStateToProps, {updateUser})(withRouter(AlertBox))
