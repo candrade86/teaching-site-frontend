@@ -15,7 +15,12 @@ const Container = styled.div`
 
   border: solid red;
 `
-
+export const H1 = styled.h1`
+    font-size: 3rem;
+    &:hover{
+        cursor: pointer
+    }
+`
 export const AlertBoxContainer = (props) => {
     return (
         <Container style={{ display: props.view}}>

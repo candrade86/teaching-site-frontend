@@ -174,7 +174,7 @@ class Scheduler extends Component {
           let fbToken = JSON.parse(localStorage.getItem('fbToken'))
           username = `${fbToken.username} #${fbToken.id}`;
         }
-      
+       
         let day = this.dayOfWeek(start)
         
         const title = username;
@@ -182,6 +182,7 @@ class Scheduler extends Component {
 
         let current = new Date();
         
+
         if(start > current) {
         if (diff <= 60){
           if (diff === 30){
@@ -192,14 +193,13 @@ class Scheduler extends Component {
               end,
               day  
           }
-         
+
               this.props.createEvent(eventProps)
-             // Need to get event to display on scheduler immediately after click if only one class
-             // type is available to the user. 
+             // prevent event from being created if user has no classes purchased
           }
         }
         }
-
+      
     
       }       
     
