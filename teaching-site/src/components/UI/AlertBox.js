@@ -50,7 +50,8 @@ class AlertBox extends Component {
 
         if(this.props.currentUser.classType.conversation === 0 && this.props.currentUser.classType.pronunciation === 0){
           Alert = <div style={{height: '20vh', width: '100%', justifyContent: 'center', display: 'flex', alignItems: 'center'}}> <H1 onClick={()=> this.props.history.push('/billing')} style={{fontSize: '3rem', padding: '0 1%'}}> Click here to purchase classes </H1> </div>
-        } else {
+        } 
+        if(this.props.currentUser.classType.conversation > 0 && this.props.currentUser.classType.pronunciation > 0) {
             Alert = (
                 <div> 
                     <h1 style={{fontSize: '4rem'}}> Choose a class type: </h1>

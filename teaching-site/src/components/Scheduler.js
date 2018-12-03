@@ -51,7 +51,9 @@ class Scheduler extends Component {
       }
     
       componentDidMount() {
-        // let id;
+        if(this.props.currentUser.classType.conversation === 0 && this.props.currentUser.classType.pronunciation === 0) {
+          disp = 'block';  
+        }
   
         if (localStorage.getItem('token')){ 
           let token = localStorage.getItem("token");   
@@ -147,11 +149,7 @@ class Scheduler extends Component {
         
           if(this.props.currentUser.classType.conversation > 0 && this.props.currentUser.classType.pronunciation > 0) {
             disp = 'block';  
-          } 
-
-          if(this.props.currentUser.classType.conversation === 0 && this.props.currentUser.classType.pronunciation === 0) {
-            disp = 'block';  
-          }
+          }        
 
           if(this.props.currentUser.classType.conversation > 0 && this.props.currentUser.classType.pronunciation === 0) {
             this.props.updateUser({id: id, packageType: 'conversation', total: -1 })
@@ -298,6 +296,9 @@ class Scheduler extends Component {
       }
 
   render() {
+
+  
+
     const token = localStorage.getItem("token");
     let fbToken = localStorage.getItem("fbToken");
     let username;
