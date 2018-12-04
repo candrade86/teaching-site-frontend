@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { updateUser } from '../../actions'
-import { AlertBoxContainer, Button, H1 } from '../../styled-components/AlertBox'
+import { AlertBoxContainer, Button, AlertNone, H1 } from '../../styled-components/AlertBox'
 import jwt_decode from 'jwt-decode';
 
 let id;
@@ -49,7 +49,7 @@ class AlertBox extends Component {
         let Alert;
 
         if(this.props.currentUser.classType.conversation === 0 && this.props.currentUser.classType.pronunciation === 0){
-          Alert = <div style={{height: '20vh', width: '100%', justifyContent: 'center', display: 'flex', alignItems: 'center'}}> <H1 onClick={()=> this.props.history.push('/billing')} style={{fontSize: '3rem', padding: '0 1%'}}> Click here to purchase classes </H1> </div>
+          Alert = <AlertNone> <H1 onClick={()=> this.props.history.push('/billing')} style={{fontSize: '3rem', padding: '0 1%'}}> Click here to purchase classes </H1> </AlertNone>
         } 
         if(this.props.currentUser.classType.conversation > 0 && this.props.currentUser.classType.pronunciation > 0) {
             Alert = (

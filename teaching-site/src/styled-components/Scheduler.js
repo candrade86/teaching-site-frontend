@@ -50,6 +50,9 @@ export const Logout = styled.p`
 `
 
 export const AlertWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   z-index: 1;
   /* top: 50%;
@@ -59,4 +62,5 @@ export const AlertWrapper = styled.div`
   min-height: 100vh;
   min-width: 100vw;
   /* text-align: center; */
+  border: solid yellow;
 `

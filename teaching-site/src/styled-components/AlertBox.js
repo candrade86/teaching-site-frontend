@@ -29,6 +29,14 @@ export const AlertBoxContainer = (props) => {
     )
 }
 
+export const AlertNone = styled.div`
+    height: 20vh;
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+`
+
 export const Button = styled.button`
     background-color: yellow; 
 `

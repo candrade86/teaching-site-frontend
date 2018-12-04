@@ -322,7 +322,7 @@ class Scheduler extends Component {
     return (
       <Container>
         {console.log('user', this.props.currentUser)}
-        <AlertWrapper style={{display: `${disp}`}}>
+        <AlertWrapper style={{display: `${disp}`, position: 'absolute', zIndex: '1'}}>
           <AlertBox />
         </AlertWrapper>
 
