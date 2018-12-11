@@ -30,7 +30,7 @@ export const AlertBoxContainer = (props) => {
 }
 
 export const AlertNone = styled.div`
-    height: 20vh;
+    /* height: 100vh; */
     width: 100%; 
     display: flex;
     justify-content: center; 

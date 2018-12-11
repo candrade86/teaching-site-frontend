@@ -9,6 +9,28 @@ export const Container = styled.div`
     min-height: 100vh;
 
     /* border: solid pink; */
+
+    
+-webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 `
 
 export const Header = styled.div`
@@ -60,7 +82,7 @@ export const AlertWrapper = styled.div`
   margin-left: -50px;
   margin-top: -50px; */
   min-height: 100vh;
-  min-width: 100vw;
+  width: 100vw;
   /* text-align: center; */
   border: solid yellow;
 `
